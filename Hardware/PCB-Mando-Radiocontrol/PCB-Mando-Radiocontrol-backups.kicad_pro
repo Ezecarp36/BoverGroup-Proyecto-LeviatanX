@@ -244,10 +244,12 @@
   },
   "libraries": {
     "pinned_footprint_libs": [],
-    "pinned_symbol_libs": []
+    "pinned_symbol_libs": [
+      "EESTN5"
+    ]
   },
   "meta": {
-    "filename": "PCB-Radiocontrol.kicad_pro",
+    "filename": "PCB-Mando-Radiocontrol-backups.kicad_pro",
     "version": 1
   },
   "net_settings": {
