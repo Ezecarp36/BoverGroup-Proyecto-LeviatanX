@@ -34,9 +34,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.762,
-          "height": 1.524,
-          "width": 1.524
+          "drill": 0.5,
+          "height": 2.5,
+          "width": 2.5
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -389,10 +389,12 @@
   },
   "libraries": {
     "pinned_footprint_libs": [],
-    "pinned_symbol_libs": []
+    "pinned_symbol_libs": [
+      "EESTN5"
+    ]
   },
   "meta": {
-    "filename": "PCB-Controladora-Vuelo.kicad_pro",
+    "filename": "PCB-Mando-Radiocontrol-backups.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -457,8 +459,18 @@
       "version": 1
     },
     "net_format_name": "",
+    "ngspice": {
+      "fix_include_paths": true,
+      "fix_passive_vals": false,
+      "meta": {
+        "version": 0
+      },
+      "model_mode": 0,
+      "workbook_filename": ""
+    },
     "page_layout_descr_file": "",
     "plot_directory": "",
+    "spice_adjust_passive_values": false,
     "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",
     "spice_model_current_sheet_as_root": true,
@@ -469,7 +481,7 @@
   },
   "sheets": [
     [
-      "ac5864b2-231c-45bd-8efa-594ea27cde2d",
+      "a09d701e-8048-4e72-8e3a-cb0f8f921380",
       ""
     ]
   ],
