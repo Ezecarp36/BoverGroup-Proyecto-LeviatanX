@@ -1,4 +1,4 @@
-21898520088871569
+21936696835146438
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -2400,13 +2400,6 @@ speaker CUI
 0
 2
 2
-COM-09032
-XDCR_COM-09032
-
-
-0
-14
-14
 Calibration_Scale
 Gauge_10mm_Type1_CopperTop
 Gauge, Massstab, 10mm, CopperTop, Type 1,
@@ -53354,6 +53347,13 @@ ARDUINO_as_UNO_R3_CONTOUR
 32
 32
 EESTN5
+Amplificador
+Through hole pin header horizontal
+pin header HEADER-4H
+0
+4
+4
+EESTN5
 Arduino_Mega2560_Shield
 https://store.arduino.cc/arduino-mega-2560-rev3
 
@@ -53704,12 +53704,26 @@ ESP-WROOM-32
 64
 39
 EESTN5
+ESP32S
+ESP32S
+ESP32
+0
+38
+38
+EESTN5
+ESP32S-CAM
+
+
+0
+16
+16
+EESTN5
 ESP32_DEVKITC
 ESP32_DEVKITC
 ESP32
 0
-36
-36
+38
+38
 EESTN5
 ESP32_DEVKIT_V1_DOIT
 ESP32 DEVKIT V1 DOIT
@@ -53717,6 +53731,13 @@ ESP32
 0
 36
 36
+EESTN5
+ESP32_DevKit_V1_CH9102X
+ESP32_DEVKITC
+ESP32
+0
+30
+30
 EESTN5
 ESP8266
 Through hole straight pin header, 2x04, 2.54mm pitch, double rows
@@ -54054,6 +54075,13 @@ PAD_SMD_3x6mm
 1
 1
 EESTN5
+PRESET-DUAL
+
+
+0
+4
+3
+EESTN5
 PTC_1210
 PTC Resettable Fuse, 1210
 ptc, fuse
@@ -54215,12 +54243,12 @@ Plantilla_Pico
 0
 0
 EESTN5
-Pokemon
-
-
+Pololu-G2-18v17
+Pololu G2-18v17 motor driver
+MOTOR DRIVER POLOLU
 0
-0
-0
+3
+3
 EESTN5
 Pololu_Ball_Caster_3_8
 Hole 2mm
@@ -54235,13 +54263,6 @@ Pololu_Breakout-16_15.2x20.3mm
 0
 16
 16
-EESTN5
-Pololu_G2_18v17
-Pololu motor controller
-
-0
-8
-8
 EESTN5
 Pololu_Micro_Con_Soporte_Simple
 Pololu Micro Gear Motor W/Mount
@@ -54341,6 +54362,13 @@ R
 2
 2
 EESTN5
+RPi_Pico_SMD_TH
+Through hole straight pin header, 2x20, 2.54mm pitch, double rows
+Through hole pin header THT 2x20 2.54mm double row
+0
+86
+43
+EESTN5
 R_0805
 
 
@@ -54351,6 +54379,13 @@ EESTN5
 R_1206
 SMT resistor, 1206
 
+0
+2
+2
+EESTN5
+R_LDR_5.1
+Resistor, LDR 5.1x3.4mm, see http://yourduino.com/docs/Photoresistor-5516-datasheet.pdf
+Resistor LDR5.1x3.4mm
 0
 2
 2
@@ -54368,13 +54403,6 @@ Relay DPDT Finder 40.52 Pitch 5mm
 0
 8
 8
-EESTN5
-SENSOR
-
-
-0
-3
-3
 EESTN5
 SO-6L_10x3.84mm_P1.27mm
 6-pin plasic small outline 7,5mm long https://toshiba.semicon-storage.com/info/docget.jsp?did=53548&prodName=TLP2770
@@ -54670,13 +54698,6 @@ Hole 3mm
 1
 1
 EESTN5
-leandro
-
-
-0
-0
-0
-EESTN5
 led_3mm_clear
 3mm clear led
 led
@@ -54837,13 +54858,6 @@ TO220
 0
 3
 3
-ESP32-DEVKIT-V1
-MODULE_ESP32_DEVKIT_V1
-
-
-0
-30
-30
 Ferrite_THT
 LairdTech_28C0236-0JW-10
 Ferrite, vertical, LairdTech 28C0236-0JW-10, https://assets.lairdtech.com/home/brandworld/files/28C0236-0JW-10.pdf, JW Miller core https://www.bourns.com/products/magnetic-products/j.w.-miller-through-hole-ferrite-beads-emi-filters
@@ -55040,6 +55054,27 @@ emi filter
 0
 5
 5
+Footprints
+CristalAtmega128
+
+
+0
+2
+2
+Footprints
+JST_BM10B-SRSS-TB(LF)(SN)
+
+
+0
+12
+12
+Footprints
+Stick
+
+
+0
+10
+10
 Fuse
 Fuse_0402_1005Metric
 Fuse SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator

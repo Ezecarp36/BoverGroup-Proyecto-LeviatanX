@@ -390,7 +390,8 @@
   "libraries": {
     "pinned_footprint_libs": [],
     "pinned_symbol_libs": [
-      "EESTN5"
+      "EESTN5",
+      "Librerias"
     ]
   },
   "meta": {
