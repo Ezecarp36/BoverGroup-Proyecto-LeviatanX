@@ -38,6 +38,19 @@
   )
 
   (setup
+    (stackup
+      (layer "F.SilkS" (type "Top Silk Screen"))
+      (layer "F.Paste" (type "Top Solder Paste"))
+      (layer "F.Mask" (type "Top Solder Mask") (thickness 0.01))
+      (layer "F.Cu" (type "copper") (thickness 0.035))
+      (layer "dielectric 1" (type "core") (thickness 1.51) (material "FR4") (epsilon_r 4.5) (loss_tangent 0.02))
+      (layer "B.Cu" (type "copper") (thickness 0.035))
+      (layer "B.Mask" (type "Bottom Solder Mask") (thickness 0.01))
+      (layer "B.Paste" (type "Bottom Solder Paste"))
+      (layer "B.SilkS" (type "Bottom Silk Screen"))
+      (copper_finish "None")
+      (dielectric_constraints no)
+    )
     (pad_to_mask_clearance 0)
     (pcbplotparams
       (layerselection 0x00010fc_ffffffff)
@@ -88,7 +101,7 @@
   (net 10 "/RX")
   (net 11 "/TX")
   (net 12 "unconnected-(J1-Pin_6-Pad6)")
-  (net 13 "unconnected-(SW2-A-Pad1)")
+  (net 13 "unconnected-(SW3-C-Pad3)")
   (net 14 "unconnected-(U1-D2-Pad4)")
   (net 15 "unconnected-(U1-D3-Pad5)")
   (net 16 "/SwDer")
@@ -109,9 +122,9 @@
   (net 31 "unconnected-(U1-A4-Pad27)")
   (net 32 "unconnected-(U1-A5-Pad28)")
   (net 33 "unconnected-(U2-IRQ-Pad8)")
-  (net 34 "unconnected-(SW2-C-Pad3)")
-  (net 35 "unconnected-(SW3-A-Pad1)")
-  (net 36 "unconnected-(SW3-C-Pad3)")
+  (net 34 "unconnected-(SW3-A-Pad1)")
+  (net 35 "unconnected-(SW2-C-Pad3)")
+  (net 36 "unconnected-(SW2-A-Pad1)")
 
   (footprint "PotStick:XDCR_COM-09032" (layer "F.Cu")
     (tstamp 0e5d456a-92c9-4c4a-b564-e6253bef0593)
@@ -1223,11 +1236,11 @@
     (fp_line (start 3.81 1.397) (end -3.81 1.397)
       (stroke (width 0.15) (type solid)) (layer "F.SilkS") (tstamp 22031509-676c-48c3-ad55-812e3a063b92))
     (pad "1" thru_hole rect (at -2.54 0) (size 2 2.19964) (drill 0.5) (layers "*.Cu" "*.Mask" "F.SilkS")
-      (net 35 "unconnected-(SW3-A-Pad1)") (pinfunction "A") (pintype "passive") (tstamp 09b61b87-9f64-4bcd-a894-ac5f51ac8c32))
+      (net 34 "unconnected-(SW3-A-Pad1)") (pinfunction "A") (pintype "passive") (tstamp 09b61b87-9f64-4bcd-a894-ac5f51ac8c32))
     (pad "2" thru_hole oval (at 0 0) (size 2.2 2.19964) (drill 0.5) (layers "*.Cu" "*.Mask" "F.SilkS")
       (net 16 "/SwDer") (pinfunction "B") (pintype "passive") (tstamp 9328e1f2-04cb-447d-90cb-d060413b3d1d))
     (pad "3" thru_hole oval (at 2.54 0) (size 2 2.19964) (drill 0.5) (layers "*.Cu" "*.Mask" "F.SilkS")
-      (net 36 "unconnected-(SW3-C-Pad3)") (pinfunction "C") (pintype "passive") (tstamp 285df610-931f-4450-8024-f2dac00d3b5e))
+      (net 13 "unconnected-(SW3-C-Pad3)") (pinfunction "C") (pintype "passive") (tstamp 285df610-931f-4450-8024-f2dac00d3b5e))
     (model "Pin_socket_3.wrl"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
@@ -1275,11 +1288,11 @@
     (fp_line (start 3.81 1.397) (end -3.81 1.397)
       (stroke (width 0.15) (type solid)) (layer "F.SilkS") (tstamp 0b20816d-bf34-45f7-8c4a-41c04b105ab9))
     (pad "1" thru_hole rect (at -2.54 0) (size 2 2.19964) (drill 0.5) (layers "*.Cu" "*.Mask" "F.SilkS")
-      (net 13 "unconnected-(SW2-A-Pad1)") (pinfunction "A") (pintype "passive") (tstamp 16514be0-81c7-430e-a500-b58888248005))
+      (net 36 "unconnected-(SW2-A-Pad1)") (pinfunction "A") (pintype "passive") (tstamp 16514be0-81c7-430e-a500-b58888248005))
     (pad "2" thru_hole oval (at 0 0) (size 2 2.19964) (drill 0.5) (layers "*.Cu" "*.Mask" "F.SilkS")
       (net 17 "/SwIzq") (pinfunction "B") (pintype "passive") (tstamp 1187ed33-9cc3-4894-8fa3-7468cd439a73))
     (pad "3" thru_hole oval (at 2.54 0) (size 2 2.19964) (drill 0.5) (layers "*.Cu" "*.Mask" "F.SilkS")
-      (net 34 "unconnected-(SW2-C-Pad3)") (pinfunction "C") (pintype "passive") (tstamp 671ce37c-c289-4329-ad71-29f0c3363a58))
+      (net 35 "unconnected-(SW2-C-Pad3)") (pinfunction "C") (pintype "passive") (tstamp 671ce37c-c289-4329-ad71-29f0c3363a58))
     (model "Pin_socket_3.wrl"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
@@ -1771,6 +1784,5 @@
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp f65c2e8f-4195-44b3-a33f-78675020d06e))
 
   (segment (start 174.25 112.5) (end 171.9 112.5) (width 0.25) (layer "F.Cu") (net 2) (tstamp c19fe086-a3e2-431c-a512-20c9a863b799))
-  (segment (start 151.29 97.93) (end 152.11 97.11) (width 0.25) (layer "F.Cu") (net 27) (tstamp bffe7b80-051e-49c7-9d71-8976f48e0a38))
 
 )
