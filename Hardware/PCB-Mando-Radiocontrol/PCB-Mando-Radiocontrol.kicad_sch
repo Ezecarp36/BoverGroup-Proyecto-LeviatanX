@@ -1291,6 +1291,10 @@
     (stroke (width 0) (type default))
     (uuid 5e7a7ed6-ccc3-406a-875c-0d9dbd4c7fe4)
   )
+  (wire (pts (xy 116.84 99.06) (xy 121.92 99.06))
+    (stroke (width 0) (type default))
+    (uuid 600397e3-ad32-4f8d-ab48-6d4d17c1e7e7)
+  )
   (wire (pts (xy 212.09 110.49) (xy 218.44 110.49))
     (stroke (width 0) (type default))
     (uuid 60aab1d1-9332-4b14-a775-9ef882280038)
@@ -1636,6 +1640,10 @@
   (wire (pts (xy 53.086 36.83) (xy 53.086 38.1))
     (stroke (width 0) (type default))
     (uuid ed7293d5-aa82-463b-8e07-bfc135fc303b)
+  )
+  (wire (pts (xy 116.84 96.52) (xy 121.92 96.52))
+    (stroke (width 0) (type default))
+    (uuid ed94cbe1-d177-457c-abe6-b9118a687cc1)
   )
   (wire (pts (xy 60.96 114.808) (xy 68.58 114.808))
     (stroke (width 0) (type default))
@@ -3349,6 +3357,10 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 444f9a87-ab4c-4a0d-a3d1-610d96813f69)
   )
+  (label "SwDer" (at 116.84 99.06 180) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right bottom))
+    (uuid 4589ecd3-2744-4311-b9ef-fa9c77438ffb)
+  )
   (label "TX" (at 40.64 144.78 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 5c8f1dc1-ef50-4f69-9d71-11997f8a1ffb)
@@ -3401,6 +3413,10 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid caa004d5-b2a2-4f27-a784-d1c612018455)
   )
+  (label "SwIzq" (at 116.84 96.52 180) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right bottom))
+    (uuid ced8c7db-aa4a-46d1-b97a-3716286bfc5e)
+  )
   (label "PotIzqA" (at 201.93 44.45 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid ecdf8100-e3e2-4c10-a9df-8ae225a220b5)
@@ -3428,7 +3444,7 @@
     (property "Reference" "C2" (at 33.02 76.708 0)
       (effects (font (size 1.016 1.016)) (justify left))
     )
-    (property "Value" "0.1uF" (at 33.02 81.28 0)
+    (property "Value" "100nF" (at 33.02 81.28 0)
       (effects (font (size 1.016 1.016)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 32.7152 82.55 0)
@@ -3440,7 +3456,7 @@
     (pin "1" (uuid b942113f-68f5-4fb6-a86b-2abbec03edd7))
     (pin "2" (uuid 99af0c82-b0c7-4480-8dd8-86986a9603e9))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "C2") (unit 1)
         )
@@ -3465,7 +3481,7 @@
     )
     (pin "1" (uuid 839d03b2-b257-44c4-8203-6eadffb51580))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR022") (unit 1)
         )
@@ -3490,7 +3506,7 @@
     )
     (pin "1" (uuid d13d2b35-2350-417a-a153-881a0c2eca2f))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR015") (unit 1)
         )
@@ -3515,7 +3531,7 @@
     )
     (pin "1" (uuid 68f869c4-1667-49b8-b40f-5d22924df7c9))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR04") (unit 1)
         )
@@ -3540,7 +3556,7 @@
     )
     (pin "1" (uuid 1047748d-c57b-4bb4-9b4c-5d4b7956def5))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR017") (unit 1)
         )
@@ -3565,7 +3581,7 @@
     )
     (pin "1" (uuid 340f2c25-9025-4909-8356-05f3962c3668))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR023") (unit 1)
         )
@@ -3590,7 +3606,7 @@
     )
     (pin "1" (uuid 433cb820-613e-47b3-bb31-3db57949c751))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR07") (unit 1)
         )
@@ -3615,7 +3631,7 @@
     )
     (pin "1" (uuid ee552a69-b870-4bd6-9c47-500bc62b694f))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR011") (unit 1)
         )
@@ -3640,7 +3656,7 @@
     )
     (pin "1" (uuid 9db914ad-bf7b-4eda-b0fd-5ae3a8d83bd8))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR010") (unit 1)
         )
@@ -3665,7 +3681,7 @@
     )
     (pin "1" (uuid 8dd123fd-8e6c-4b64-af97-58d4512eeac4))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR021") (unit 1)
         )
@@ -3691,7 +3707,7 @@
     (pin "1" (uuid 530d4b2d-efc6-49a0-8f53-00ce7dbc8829))
     (pin "2" (uuid 3abee687-f690-4acb-8c4e-854f812c7f2e))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "C7") (unit 1)
         )
@@ -3717,7 +3733,7 @@
     (pin "1" (uuid a075b4a8-3b98-4608-8d24-afd75df3cedd))
     (pin "2" (uuid d9a733e1-3ee8-4bf5-a31a-8cec9039197e))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "Y1") (unit 1)
         )
@@ -3743,7 +3759,7 @@
     (pin "1" (uuid 141c6c22-9076-4c8e-8b8c-7a5191f09160))
     (pin "2" (uuid 48d187b6-3804-452d-b9ef-36c46f4bc323))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "C12") (unit 1)
         )
@@ -3789,7 +3805,7 @@
     (pin "V2" (uuid 39f56564-0182-4d5b-aed2-44c2061c27d6))
     (pin "V3" (uuid a6e13730-ff45-4a59-9313-ca46f42285f5))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "U5") (unit 1)
         )
@@ -3816,7 +3832,7 @@
     (pin "2" (uuid ac30e410-2f1d-48c5-b87e-5b586f4ad602))
     (pin "3" (uuid 8e765888-69c3-45f0-8e32-f41ac1633085))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "SW1") (unit 1)
         )
@@ -3841,7 +3857,7 @@
     )
     (pin "1" (uuid d0d5b3c2-5595-4661-a613-c07f5b36971a))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR025") (unit 1)
         )
@@ -3867,7 +3883,7 @@
     (pin "1" (uuid 886ff17d-cf1a-4d63-8bbd-e7b4f80be6e4))
     (pin "2" (uuid 41f0ef9c-a9d5-4f46-a27c-e6d4ded3f453))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "C11") (unit 1)
         )
@@ -3892,7 +3908,7 @@
     )
     (pin "1" (uuid f231c497-1675-44f7-a0dc-9e3cb3e831e7))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR020") (unit 1)
         )
@@ -3917,7 +3933,7 @@
     )
     (pin "1" (uuid f75923d7-50c0-4ab6-a3d2-090cc2147cf1))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR05") (unit 1)
         )
@@ -3943,7 +3959,7 @@
     (pin "1" (uuid 70a4ef1f-844c-4900-a147-c6dc4db72b25))
     (pin "2" (uuid bad1e5a2-849e-4df3-ac05-2088229cb45e))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "C8") (unit 1)
         )
@@ -3968,7 +3984,7 @@
     )
     (pin "1" (uuid 733795f3-8e1f-4346-a2d7-740205e4045b))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR030") (unit 1)
         )
@@ -4020,7 +4036,7 @@
     (pin "8" (uuid 9a001f34-ed95-4d94-a2c0-8a5929e5b978))
     (pin "9" (uuid fa0b6dd9-0f0a-49e4-9461-0126a6563722))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "U1") (unit 1)
         )
@@ -4045,7 +4061,7 @@
     )
     (pin "1" (uuid eb759888-422b-4da5-b127-7966c5690902))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR06") (unit 1)
         )
@@ -4071,7 +4087,7 @@
     (pin "1" (uuid 42a7d764-30c0-4b4f-afab-42a00500ca43))
     (pin "2" (uuid 975a1077-4aaf-4f48-a93b-eb36eca8c14e))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "C6") (unit 1)
         )
@@ -4096,7 +4112,7 @@
     )
     (pin "1" (uuid 46219227-8ff8-40bf-8ab6-b15e4ba4bcd7))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR016") (unit 1)
         )
@@ -4122,7 +4138,7 @@
     (pin "1" (uuid b328cfae-1db4-4909-8a01-f406772e4f73))
     (pin "2" (uuid 2ccb21b4-6283-4540-9076-33e731090007))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "J2") (unit 1)
         )
@@ -4147,7 +4163,7 @@
     )
     (pin "1" (uuid ae3b1da3-b832-4d4e-b821-913656ba7eff))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR026") (unit 1)
         )
@@ -4172,7 +4188,7 @@
     )
     (pin "1" (uuid c24b4984-d9ba-42ad-996f-f1bee6cda63d))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR03") (unit 1)
         )
@@ -4197,7 +4213,7 @@
     )
     (pin "1" (uuid 24328a2f-40b4-408f-8d46-3cf257b24552))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR029") (unit 1)
         )
@@ -4222,7 +4238,7 @@
     )
     (pin "1" (uuid 3c6facb3-3e23-45f4-969f-6951967857c2))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR02") (unit 1)
         )
@@ -4249,7 +4265,7 @@
     (pin "2" (uuid 13d9a07a-b886-4192-8073-f710bca7fe1d))
     (pin "3" (uuid a7db8266-6c45-4955-9ca8-d22f19c3f9f8))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "U4") (unit 1)
         )
@@ -4274,7 +4290,7 @@
     )
     (pin "1" (uuid 3f8d553c-053d-4eda-904e-81e7cce1a19f))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR01") (unit 1)
         )
@@ -4299,7 +4315,7 @@
     )
     (pin "1" (uuid 7effeec4-e4c1-4502-94d1-3dab7b11b9d3))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR028") (unit 1)
         )
@@ -4324,7 +4340,7 @@
     )
     (pin "1" (uuid bf9a494a-557e-4154-be1c-5b9e07cae71c))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR018") (unit 1)
         )
@@ -4349,7 +4365,7 @@
     )
     (pin "1" (uuid 3896b7da-9bf1-47f6-a65c-ad84e9d8ff8a))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR09") (unit 1)
         )
@@ -4375,7 +4391,7 @@
     (pin "1" (uuid 08fc417e-5771-4a66-9d40-c67660822552))
     (pin "2" (uuid bd803edb-cadd-4984-b4bd-108bcbdaa306))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "C1") (unit 1)
         )
@@ -4401,7 +4417,7 @@
     (pin "1" (uuid abf8a41f-f079-4490-883b-e30ad8723c79))
     (pin "2" (uuid fc710205-ef9d-48ce-95ad-63631d383d1a))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "C3") (unit 1)
         )
@@ -4427,7 +4443,7 @@
     (pin "1" (uuid 2113ca1a-8a84-41ac-8e7e-a5d9ba250449))
     (pin "2" (uuid 1fd4f73e-9a46-4480-883f-1bd75da62a67))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "C9") (unit 1)
         )
@@ -4459,7 +4475,7 @@
     (pin "7" (uuid bfce66c9-1b79-48a0-9a81-f1fe01097a7f))
     (pin "8" (uuid b76515d3-32e4-4015-972d-a1eb5f7a3b88))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "U2") (unit 1)
         )
@@ -4505,7 +4521,7 @@
     (pin "V2" (uuid 54270c49-39c7-47e2-bc1a-50efc6a9cf6c))
     (pin "V3" (uuid a2424270-9cb2-44de-a81d-44e0f6442828))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "U6") (unit 1)
         )
@@ -4530,7 +4546,7 @@
     )
     (pin "1" (uuid 7f8229f4-a0af-4436-bdcc-ec5ae959e7cf))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR08") (unit 1)
         )
@@ -4556,7 +4572,7 @@
     (pin "1" (uuid db87dd0a-5921-4bb6-aa9a-832d06c14537))
     (pin "2" (uuid 43ff6348-eff2-4ea3-aa19-038d5e903abc))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "C5") (unit 1)
         )
@@ -4581,7 +4597,7 @@
     )
     (pin "1" (uuid 81f55a50-b56c-4686-a62d-0b8df9ffe406))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR012") (unit 1)
         )
@@ -4606,7 +4622,7 @@
     )
     (pin "1" (uuid 5c62c9a2-f317-4fe0-bd8c-883ab4c14d94))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR024") (unit 1)
         )
@@ -4631,7 +4647,7 @@
     )
     (pin "1" (uuid 096b21ba-8ae3-4e9d-8be1-105f675f3a0a))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR027") (unit 1)
         )
@@ -4673,7 +4689,7 @@
     (pin "2" (uuid 3183b479-6b6c-42c0-85cf-3ddbab0a196f))
     (pin "3" (uuid 56701e56-a8cb-43a9-b7a7-0213898cdad7))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "Switch2") (unit 1)
         )
@@ -4702,7 +4718,7 @@
     (pin "4" (uuid 97b64cd6-2009-41c3-a631-2c9ac4c41de7))
     (pin "5" (uuid 775182e3-ab8d-4471-b147-955a11c8b43c))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "J3") (unit 1)
         )
@@ -4716,7 +4732,7 @@
     (property "Reference" "C4" (at 62.23 76.708 0)
       (effects (font (size 1.016 1.016)) (justify left))
     )
-    (property "Value" "0.1uF" (at 62.23 81.28 0)
+    (property "Value" "100nF" (at 62.23 81.28 0)
       (effects (font (size 1.016 1.016)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 61.9252 82.55 0)
@@ -4728,7 +4744,7 @@
     (pin "1" (uuid 6d64da74-efd0-40a2-99da-bb614fcd693c))
     (pin "2" (uuid 010b3057-cf54-4c21-89ee-bdc87f1efd70))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "C4") (unit 1)
         )
@@ -4754,7 +4770,7 @@
     (pin "1" (uuid 141ef17a-31a4-4381-bb95-6719f74af3a1))
     (pin "2" (uuid 6f17b6b4-9f33-46ab-acd5-bb6706cc21c5))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "C10") (unit 1)
         )
@@ -4781,7 +4797,7 @@
     (pin "2" (uuid 6fd613ba-c5c7-4850-9b96-ab3fcdfe1116))
     (pin "3" (uuid 86215406-03b3-497b-ba66-eaa02779323c))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "U3") (unit 1)
         )
@@ -4823,7 +4839,7 @@
     (pin "2" (uuid 1089c25d-855d-48ca-85f3-93ee3e1a06c6))
     (pin "3" (uuid 725a7c0f-ad5b-419e-9852-38fe38121bd5))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "Switch1") (unit 1)
         )
@@ -4849,7 +4865,7 @@
     (pin "1" (uuid 39a40ae8-7bab-4992-af66-d938894ef15e))
     (pin "2" (uuid cd6efe5d-e881-4720-8e74-b62799ff9232))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "R5") (unit 1)
         )
@@ -4874,7 +4890,7 @@
     )
     (pin "1" (uuid ce13f4b7-3563-40a6-8061-63e25067bdf9))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR019") (unit 1)
         )
@@ -4899,7 +4915,7 @@
     )
     (pin "1" (uuid a4270d44-d827-4a9d-b08a-b6cfb418340a))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR014") (unit 1)
         )
@@ -4924,7 +4940,7 @@
     )
     (pin "1" (uuid a4efd965-7a2f-4723-ac21-594770295ff2))
     (instances
-      (project "PCB-Mando-Radiocontrol-backups"
+      (project "PCB-Mando-Radiocontrol"
         (path "/a09d701e-8048-4e72-8e3a-cb0f8f921380"
           (reference "#PWR013") (unit 1)
         )
