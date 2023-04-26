@@ -19,7 +19,7 @@ float girosc_ang_x, girosc_ang_y, girosc_ang_z;
 float girosc_ang_x_prev, girosc_ang_y_prev, girosc_ang_z_prev;
 
 void setup() {
-  Serial.begin(57600);    //Iniciando puerto serial
+  Serial.begin(115200);    //Iniciando puerto serial
   Wire.begin();           //Iniciando I2C  
   sensor.initialize();    //Iniciando el sensor
 
@@ -52,14 +52,11 @@ void loop() {
   {
     //Mostrar los angulos 
     Serial.print("Rotacion en X:  ");
-    Serial.print(girosc_ang_x); 
-    Serial.print("  //  "); 
+    Serial.println(girosc_ang_x); 
     Serial.print("tRotacion en Y: ");
     Serial.println(girosc_ang_y);
-    Serial.print("  //  "); 
     Serial.print("tRotacion en z: ");
     Serial.println(girosc_ang_z);
-    delay(10);
     currenTime = millis();
   }
 

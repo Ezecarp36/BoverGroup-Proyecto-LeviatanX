@@ -24,7 +24,7 @@ int ax_o,ay_o,az_o;
 int gx_o,gy_o,gz_o;
 
 void setup() {
-  Serial.begin(57600);   //Iniciando puerto serial
+  Serial.begin(115200);   //Iniciando puerto serial
   Wire.begin();           //Iniciando I2C  
   sensor.initialize();    //Iniciando el sensor
 

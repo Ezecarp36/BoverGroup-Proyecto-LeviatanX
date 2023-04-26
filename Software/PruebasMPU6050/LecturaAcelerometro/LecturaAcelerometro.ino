@@ -14,7 +14,7 @@ unsigned long currenTime = 0;
 int16_t ax, ay, az;
 
 void setup() {
-  Serial.begin(57600);    //Iniciando puerto serial
+  Serial.begin(115200);    //Iniciando puerto serial
   Wire.begin();           //Iniciando I2C  
   sensor.initialize();    //Iniciando el sensor
 
@@ -28,7 +28,7 @@ void loop() {
   //Calcular los angulos de inclinacion:
   float accel_ang_x=atan(ax/sqrt(pow(ay,2) + pow(az,2)))*(180.0/3.14);
   float accel_ang_y=atan(ay/sqrt(pow(ax,2) + pow(az,2)))*(180.0/3.14);
-  float accel_ang_z=atan(az/sqrt(pow(ax,2) + pow(az,2)))*(180.0/3.14);
+  float accel_ang_z=atan(az/sqrt(pow(ax,2) + pow(ay,2)))*(180.0/3.14);
   //Mostrar los angulos separadas por un [tab]
   if(millis() > currenTime + TICK_PRINT)
   {
@@ -40,7 +40,6 @@ void loop() {
     Serial.print("  //  "); 
     Serial.print("tInclinacion en Z:");
     Serial.println(accel_ang_z);
-    delay(10);
     currenTime = millis();
   }
   
