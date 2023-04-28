@@ -1,4 +1,4 @@
-21903567250836195
+21910279318311521
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -55041,12 +55041,47 @@ emi filter
 5
 5
 Footprints
-CristalAtmega128
+ESP32-DEVKIT-V1-30Pines
 
 
 0
-2
-2
+30
+30
+Footprints
+JST10mm
+
+
+0
+12
+12
+Footprints
+LOGO_BOVER
+
+
+0
+0
+0
+Footprints
+LOGO_BOVER_B.CU
+
+
+0
+0
+0
+Footprints
+LOGO_BOVER_SER
+
+
+0
+0
+0
+Footprints
+MPU-6050
+
+
+0
+8
+8
 Footprints
 SW_100SP3T1B1M2QE
 
@@ -55054,13 +55089,6 @@ SW_100SP3T1B1M2QE
 0
 3
 3
-Footprints
-Stick
-
-
-0
-10
-10
 Fuse
 Fuse_0402_1005Metric
 Fuse SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
