@@ -25,6 +25,7 @@ void loop() {
   // Leer las aceleraciones y velocidades angulares
   sensor.getAcceleration(&ax, &ay, &az);
   sensor.getRotation(&gx, &gy, &gz);
+  //calcular angulos de inclinacion
   float ax_m_s2 = ax * (9.81/16384.0);
   float ay_m_s2 = ay * (9.81/16384.0);
   float az_m_s2 = az * (9.81/16384.0);
@@ -40,5 +41,5 @@ void loop() {
   Serial.print(gy_deg_s); Serial.print("\t");
   Serial.println(gz_deg_s);
 
-  delay(100);
+  delay(10);
 }

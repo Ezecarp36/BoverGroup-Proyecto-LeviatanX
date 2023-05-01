@@ -57,9 +57,9 @@ void loop() {
   {
     Serial.print("Rotacion en X:  ");
     Serial.print(ang_x); 
-    Serial.print("tRotacion en Y: ");
-    Serial.println(ang_y);
-    Serial.print("\tRotacion en Z: ");
+    Serial.print("\t Rotacion en Y: ");
+    Serial.print(ang_y);
+    Serial.print("\t Rotacion en Z: ");
     Serial.println(ang_z);
     currenTime = millis();
   }
