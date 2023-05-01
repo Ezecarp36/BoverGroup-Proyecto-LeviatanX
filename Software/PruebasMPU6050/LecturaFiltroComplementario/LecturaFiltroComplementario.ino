@@ -23,6 +23,8 @@ void setup() {
   Serial.begin(115200);    //Iniciando puerto serial
   Wire.begin();           //Iniciando I2C  
   sensor.initialize();    //Iniciando el sensor
+  sensor.setFullScaleAccelRange( (MPU6050_IMU::MPU6050_ACCEL_FS_8));
+  sensor.setFullScaleGyroRange( (MPU6050_IMU::MPU6050_GYRO_FS_1000));
 
   if (sensor.testConnection()) Serial.println("Sensor iniciado correctamente");
   else Serial.println("Error al iniciar el sensor");
