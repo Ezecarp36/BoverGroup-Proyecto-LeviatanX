@@ -45,7 +45,7 @@ void setup() {
   Serial.print(gx_o); Serial.print("\t"); 
   Serial.print(gy_o); Serial.print("\t");
   Serial.print(gz_o); Serial.print("\t");
-  Serial.println("nnEnvie cualquier caracter para empezar la calibracionnn");  
+  Serial.println("\n Envie cualquier caracter para empezar la calibracion");  
   // Espera un caracter para empezar a calibrar
   while (true){if (Serial.available()) break;}  
   Serial.println("Calibrando, no mover IMU");  
@@ -79,7 +79,7 @@ void loop() {
   //Cada 100 lecturas corregir el offset
   if (counter==100){
     //Mostrar las lecturas separadas por un [tab]
-    Serial.print("promedio:"); Serial.print("t");
+    Serial.print("promedio:"); Serial.print("\t");
     Serial.print(p_ax); Serial.print("\t");
     Serial.print(p_ay); Serial.print("\t");
     Serial.print(p_az); Serial.print("\t");
