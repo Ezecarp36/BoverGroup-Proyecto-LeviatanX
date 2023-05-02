@@ -16,8 +16,9 @@ int16_t gx, gy, gz;
 
 long tiempo_prev;
 float dt;
-float ang_x, ang_y, ang_z;
-float ang_x_prev, ang_y_prev, ang_z_prev;
+float ang_x, ang_y,ang_z;
+float ang_x_prev, ang_y_prev,ang_z_prev;
+float girosc_ang_x_prev, girosc_ang_y_prev, girosc_ang_z_prev;
 
 void setup() {
   Serial.begin(115200);    //Iniciando puerto serial
@@ -39,15 +40,14 @@ void loop() {
   //Calcular los ángulos con acelerometro
   float accel_ang_x=atan(ay/sqrt(pow(ax,2) + pow(az,2)))*(180.0/3.14);
   float accel_ang_y=atan(-ax/sqrt(pow(ay,2) + pow(az,2)))*(180.0/3.14);
-  float accel_ang_z=atan(sqrt(pow(ax,2) + pow(ay,2))/az)*(180.0/3.14);
+  float accel_ang_z = atan2(-ax, ay) * 180 / 3.14;
 
   
   //Calcular angulo de rotación con giroscopio y filtro complemento  
   ang_x = 0.98*(ang_x_prev+(gx/131)*dt) + 0.02*accel_ang_x;
   ang_y = 0.98*(ang_y_prev+(gy/131)*dt) + 0.02*accel_ang_y;
-  ang_z = 0.98*(ang_z_prev+(gz/131)*dt) + 0.02*accel_ang_z;
   
-  
+  girosc_ang_z_prev=girosc_ang_z;
   ang_x_prev=ang_x;
   ang_y_prev=ang_y;
   ang_z_prev=ang_z;
@@ -57,10 +57,9 @@ void loop() {
   {
     Serial.print("Rotacion en X:  ");
     Serial.print(ang_x); 
+    Serial.print("  //  ");
     Serial.print("tRotacion en Y: ");
     Serial.println(ang_y);
-    Serial.print("\tRotacion en Z: ");
-    Serial.println(ang_z);
     currenTime = millis();
   }
   
