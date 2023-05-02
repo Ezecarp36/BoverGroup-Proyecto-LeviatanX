@@ -37,5 +37,10 @@ void loop() {
     Serial.println(accel_ang_y);
     currenTime = millis();
   }
+<<<<<<< HEAD
 
 }
+=======
+  
+}
+>>>>>>> 67d4ecb29658af519c34555a779af10f2f575977
