@@ -7,12 +7,13 @@
 // La dirección del MPU6050 puede ser 0x68 o 0x69, dependiendo 
 // del estado de AD0. Si no se especifica, 0x68 estará implicito
 MPU6050 sensor;
-unsigned long currenTime = 0;
-#define TICK_PRINT 500
 
 // Valores RAW (sin procesar) del acelerometro y giroscopio en los ejes x,y,z
 int16_t ax, ay, az;
 int16_t gx, gy, gz;
+
+unsigned long currenTime = 0;
+#define TICK_PRINT 500
 
 long tiempo_prev;
 float dt;

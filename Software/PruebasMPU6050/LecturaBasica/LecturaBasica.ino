@@ -21,9 +21,6 @@ void setup() {
   Serial.begin(115200);    //Iniciando puerto serial
   Wire.begin();           //Iniciando I2C  
   sensor.initialize();    //Iniciando el sensor
-  sensor.setAccelerometerRange(ACCEL_RANGE_4G);
-  sensor.setGyroscopeRange(GYRO_RANGE_500DPS);
-
   if (sensor.testConnection()) Serial.println("Sensor iniciado correctamente");
   else Serial.println("Error al iniciar el sensor");
 }
@@ -42,5 +39,5 @@ void loop() {
   Serial.print(gy); printTab();
   Serial.println(gz);
 
-  delay(200);
+  delay(500);
 }
