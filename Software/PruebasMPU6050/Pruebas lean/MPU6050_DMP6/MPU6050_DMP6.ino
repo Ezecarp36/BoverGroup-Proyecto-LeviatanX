@@ -20,9 +20,9 @@ MPU6050 mpu;
 //MPU6050 mpu(0x69); // <-- use for AD0 high
 
 
-#define INTERRUPT_PIN 2
+#define INTERRUPT_PIN 23
 
-#define LED_PIN 13
+#define LED_PIN 2
 bool blinkState = false;
 
 // MPU control/status vars
@@ -142,16 +142,17 @@ void loop() {
   Serial.print("\t");
   Serial.println(ypr[2] * 180/M_PI);
   
+  delay(50);
   // Mostrar aceleracion
-  mpu.dmpGetQuaternion(&q, fifoBuffer);
-  mpu.dmpGetAccel(&aa, fifoBuffer);
-  mpu.dmpGetGravity(&gravity, &q);
-  mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
-  Serial.print("areal\t");
-  Serial.print(aaReal.x);
-  Serial.print("\t");
-  Serial.print(aaReal.y);
-  Serial.print("\t");
-  Serial.println(aaReal.z);
+  // mpu.dmpGetQuaternion(&q, fifoBuffer);
+  // mpu.dmpGetAccel(&aa, fifoBuffer);
+  // mpu.dmpGetGravity(&gravity, &q);
+  // mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
+  // Serial.print("areal\t");
+  // Serial.print(aaReal.x);
+  // Serial.print("\t");
+  // Serial.print(aaReal.y);
+  // Serial.print("\t");
+  // Serial.println(aaReal.z);
     }
 }
