@@ -3,7 +3,7 @@
 
 Adafruit_MPU6050 mpu;
 
-const float alpha = 0.86;  // Coefficient for complementary filter
+const float alpha = 0.36;  // Coefficient for complementary filter
 float accX, accY, accZ;
 float gyroX, gyroY, gyroZ;
 float pitch = 0, roll = 0, yaw = 0;
@@ -12,8 +12,8 @@ void setup() {
   Serial.begin(115200);
   Wire.begin();
   mpu.begin();
-  mpu.setGyroRange(MPU6050_RANGE_1000_DEG);
-  mpu.setAccelerometerRange(MPU6050_RANGE_2_G);
+  mpu.setGyroRange(MPU6050_RANGE_500_DEG);
+  mpu.setAccelerometerRange(MPU6050_RANGE_4_G);
 }
 
 void loop() {
