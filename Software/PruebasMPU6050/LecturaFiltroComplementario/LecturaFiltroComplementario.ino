@@ -7,12 +7,13 @@
 // La dirección del MPU6050 puede ser 0x68 o 0x69, dependiendo 
 // del estado de AD0. Si no se especifica, 0x68 estará implicito
 MPU6050 sensor;
-unsigned long currenTime = 0;
-#define TICK_PRINT 500
 
 // Valores RAW (sin procesar) del acelerometro y giroscopio en los ejes x,y,z
 int16_t ax, ay, az;
 int16_t gx, gy, gz;
+
+unsigned long currenTime = 0;
+#define TICK_PRINT 500
 
 long tiempo_prev;
 float dt;
@@ -24,6 +25,9 @@ void setup() {
   Serial.begin(115200);    //Iniciando puerto serial
   Wire.begin();           //Iniciando I2C  
   sensor.initialize();    //Iniciando el sensor
+  //seteamos rango de mediciones
+  sensor.setFullScaleAccelRange( (MPU6050_IMU::MPU6050_ACCEL_FS_8));
+  sensor.setFullScaleGyroRange( (MPU6050_IMU::MPU6050_GYRO_FS_1000));
 
   if (sensor.testConnection()) Serial.println("Sensor iniciado correctamente");
   else Serial.println("Error al iniciar el sensor");
@@ -57,10 +61,13 @@ void loop() {
   {
     Serial.print("Rotacion en X:  ");
     Serial.print(ang_x); 
-    Serial.print("  //  ");
-    Serial.print("tRotacion en Y: ");
-    Serial.println(ang_y);
+
+    Serial.print("\t Rotacion en Y: ");
+    Serial.print(ang_y);
+    Serial.print("\t Rotacion en Z: ");
+    Serial.println(ang_z);
+    
     currenTime = millis();
   }
-  
+
 }

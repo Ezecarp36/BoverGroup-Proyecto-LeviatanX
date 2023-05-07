@@ -18,10 +18,10 @@ int p_ax, p_ay, p_az;
 long f_gx,f_gy, f_gz;
 int p_gx, p_gy, p_gz;
 int counter=0;
-
+// 150	123	17135	-1	-1	-3 -16384
 //Valor de los offsets
-int ax_o,ay_o,az_o;
-int gx_o,gy_o,gz_o;
+int ax_o = 150,ay_o = 123 , az_o = 751;
+int gx_o =-1,gy_o = -1,gz_o = -3;
 
 void setup() {
   Serial.begin(115200);   //Iniciando puerto serial
@@ -77,7 +77,7 @@ void loop() {
   p_gz = f_gz>>3;
 
   //Cada 100 lecturas corregir el offset
-  if (counter==1000){
+  if (counter==2000){
     //Mostrar las lecturas separadas por un [tab]
     Serial.print("promedio:"); Serial.print("\t");
     Serial.print(p_ax); Serial.print("\t");
