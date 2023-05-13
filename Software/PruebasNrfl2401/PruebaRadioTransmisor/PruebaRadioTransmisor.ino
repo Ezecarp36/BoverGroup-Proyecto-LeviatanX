@@ -9,17 +9,23 @@
 RF24 radio (CE, CSN);
 const byte address[6] = "00001";
 
-int dato1 = 1;
+int dato1 = 0;
 
 void setup() {
+  Serial.begin(9600);
   radio.begin();
   radio.openWritingPipe(address);
-  radio.setPALevel(RF24_PA_MIN);
-  radio.stopListening();
+  
 }
 
 void loop() {
-  radio.write(&dato1,sizeof(dato1));
-  delay(1000);
-  dato1 = dato1 + 1;
+  bool ok = radio.write(dato1,sizeof(dato1));
+  if(ok){
+    Serial.println(dato1);
+    dato1 = dato1 + 1;
+  }
+  else{
+     Serial.println("no se ha podido enviar");
+  }
+  delay(200);
 }

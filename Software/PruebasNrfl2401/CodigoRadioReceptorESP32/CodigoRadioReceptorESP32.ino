@@ -4,14 +4,12 @@
 #include <Wire.h> 
 
 RF24 radio(27, 15); //
-const byte address[6] = "00001"; // 
-int dato1 ;
+const byte address[6] = "00001";
+int dato1;
 void setup() {
-  Serial.begin(9600);                // 
+  Serial.begin(115200);                // 
   radio.begin();
   radio.openReadingPipe(1, address);   // 
-  radio.setDataRate( RF24_250KBPS );   // 
-  radio.setPALevel(RF24_PA_MAX);       // 
   radio.startListening();              // 
 
 }
@@ -20,7 +18,12 @@ void loop()
 {
   if (radio.available())              // 
   {                
-    radio.read(&dato1, sizeof(dato1));    // 
+    radio.read(dato1, sizeof(dato1));    // 
+    
     Serial.println(dato1);               // 
   }
+  else{
+    Serial.println("No hay datos disponibles...");  
+  }
+  delay(1000);
 }
