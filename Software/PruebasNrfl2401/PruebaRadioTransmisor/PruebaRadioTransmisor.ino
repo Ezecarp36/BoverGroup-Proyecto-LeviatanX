@@ -10,7 +10,6 @@ RF24 radio (CE, CSN);
 const byte address[6] = "00001";
 
 int dato1 = 1;
-int dato2 = 2;
 
 void setup() {
   radio.begin();
@@ -21,6 +20,6 @@ void setup() {
 
 void loop() {
   radio.write(&dato1,sizeof(dato1));
-  radio.write(&dato2,sizeof(dato2));
-  delay(200);
+  delay(1000);
+  dato1 = dato1 + 1;
 }
