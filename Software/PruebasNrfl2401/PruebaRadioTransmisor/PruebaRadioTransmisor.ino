@@ -7,14 +7,14 @@
 #define CE 8
 #define CSN 9
 RF24 radio (CE, CSN);
-const uint64_t canal = 0xE8E8F0F0E1LL;
+const byte address[6] = "00001";
 
 int dato1 = 1;
 int dato2 = 2;
 
 void setup() {
   radio.begin();
-  radio.openWritingPipe(canal);
+  radio.openWritingPipe(address);
   radio.setPALevel(RF24_PA_MIN);
   radio.stopListening();
 }
