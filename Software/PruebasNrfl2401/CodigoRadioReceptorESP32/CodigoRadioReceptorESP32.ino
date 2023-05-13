@@ -6,7 +6,7 @@
 #include <Wire.h> 
 
 Adafruit_SSD1306 screen(128, 64, &Wire, -1); // Ecran sur port I2C
-RF24 radio(17, 16); // pin CE, CSN à connecter sur les GPIO 22 et 21    
+RF24 radio(27, 15); // pin CE, CSN à connecter sur les GPIO 22 et 21    
 const byte address[6] = "00001"; // Adresse d'envoie (bien mettre la même dans l'émetteur)
 
 void setup() {

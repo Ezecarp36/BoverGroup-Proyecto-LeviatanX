@@ -4,8 +4,8 @@
 #include <RF24_config.h>
 #include <SPI.h>
 
-#define CE 8
-#define CSN 9
+#define CE 9
+#define CSN 10
 RF24 radio (CE, CSN);
 const byte address[6] = "00001";
 
