@@ -5,9 +5,9 @@
 
 RF24 radio(27, 15); //
 const byte address[6] = "00001";
-int dato1;
+float dato1;
 void setup() {
-  Serial.begin(115200);                // 
+  Serial.begin(9600);                // 
   radio.begin();
   radio.openReadingPipe(1, address);   // 
   radio.startListening();              // 
@@ -18,7 +18,7 @@ void loop()
 {
   if (radio.available())              // 
   {                
-    radio.read(dato1, sizeof(dato1));    // 
+    radio.read(&dato1, sizeof(dato1));    // 
     
     Serial.println(dato1);               // 
   }

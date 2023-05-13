@@ -27,5 +27,5 @@ void loop() {
   else{
      Serial.println("no se ha podido enviar");
   }
-  delay(200);
+  delay(1000);
 }
