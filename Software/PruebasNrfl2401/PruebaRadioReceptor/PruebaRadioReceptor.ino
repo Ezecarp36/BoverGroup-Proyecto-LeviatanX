@@ -20,7 +20,7 @@ void setup() {
   radio.begin();                  // Se inica el canal de comunicación.
   radio.openReadingPipe(1,canal); // Con la función "radio.openReadingPipe(1,canal)" se abre el canal de comunicación con el transmisor.
   radio.setPALevel(RF24_PA_MIN); // Con la función "radio.setPALevel(RF24_PA_MIN)" y su parámetro "RF24_PA_MIN" se configura el módulo en baja potencia.
-  radio.startListening();        // Con la función "radio.stopListening()" se define al módulo como receptor.
+  radio.startListening();        // Con la función "radio.starListening()" se define al módulo como receptor.
   
 }
 
