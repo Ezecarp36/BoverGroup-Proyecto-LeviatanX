@@ -14,13 +14,13 @@ int dato2 = 2;
 
 void setup() {
   radio.begin();
-  radio.openWritingPipe(canal);
-  radio.setPALevel(RF24_PA_MIN);
-  radio.stopListening();
+  radio.openWritingPipe(canal); // Con laa función "radio.openWritingPipe(canal)" se abre el canal de comunicación con el receptor.
+  radio.setPALevel(RF24_PA_MIN); // Con la función "radio.setPALevel(RF24_PA_MIN)" y su parámetro "RF24_PA_MIN" se configura el módulo en baja potencia.
+  radio.stopListening(); // Con la función "radio.stopListening()" se define al módulo como transmisor.
 }
 
 void loop() {
-  radio.write(&dato1,sizeof(dato1));
+  radio.write(&dato1,sizeof(dato1)); // La función "radio.write()" envía la información.
   radio.write(&dato2,sizeof(dato2));
   delay(200);
 }
