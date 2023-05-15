@@ -7,15 +7,15 @@
 #define CE 9
 #define CSN 10
 RF24 radio (CE, CSN);
-const byte address[6] = "00001";
+//const byte address[6] = "00001";
 
 int dato1 = 0;
 
 void setup() {
   Serial.begin(9600);
   radio.begin();
-  radio.openWritingPipe(address);
-  
+  radio.openWritingPipe(0xF0F0F0F0E1LL);
+  radio.stopListening();
 }
 
 void loop() {

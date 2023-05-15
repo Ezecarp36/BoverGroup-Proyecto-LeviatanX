@@ -3,14 +3,17 @@
 #include <RF24.h>
 #include <Wire.h> 
 
-RF24 radio(27, 15); //
-const byte address[6] = "00001";
+#define CE 27
+#define CSN 15
+RF24 radio (CE, CSN);
+//const byte address[6] = "00001";
+
 float dato1;
 void setup() {
   Serial.begin(9600);                // 
   radio.begin();
-  radio.openReadingPipe(1, address);   // 
-  radio.startListening();              // 
+  radio.openReadingPipe(1, 0xF0F0F0F0E1LL);   // 
+  radio.startListening(); // Con la función "radio.starListening()" se define al módulo como receptor.           // 
 
 }
 
