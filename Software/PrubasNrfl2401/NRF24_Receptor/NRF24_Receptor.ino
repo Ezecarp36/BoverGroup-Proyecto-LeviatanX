@@ -1,12 +1,12 @@
-#include "RF24.h"
-#define CE_PIN  27
+#include <RF24.h>
+#define CE_PIN 27
 #define CSN_PIN 15
 
 const byte thisSlaveAddress[5] = {'R', 'x', 'A', 'A', 'A'};
 
 RF24 radio(CE_PIN, CSN_PIN);
 
-char dataReceived[100]; // this must match dataToSend in the TX
+char dataReceived[10]; // this must match dataToSend in the TX
 bool newData = false;
 
 //===========

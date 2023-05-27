@@ -1,4 +1,4 @@
-#include "RF24.h"
+#include <RF24.h>
 #define CE_PIN  9
 #define CSN_PIN 10
 
@@ -6,7 +6,7 @@ const byte thisSlaveAddress[5] = {'R', 'x', 'A', 'A', 'A'};
 
 RF24 radio(CE_PIN, CSN_PIN);
 
-char dataToSend[100] = "Muchachooos, ahora nos volvimo a ilusionar....."; // Datos a enviar
+char dataToSend[10] = "tororo"; // Datos a enviar
 
 void setup()
 {
