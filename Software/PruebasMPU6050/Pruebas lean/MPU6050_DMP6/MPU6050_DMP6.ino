@@ -21,7 +21,7 @@ MPU6050 mpu;
 
 #define SDA 4
 #define SCL 5
-#define INTERRUPT_PIN 15
+#define INTERRUPT_PIN 14
 
 #define LED_PIN 2
 bool blinkState = false;
