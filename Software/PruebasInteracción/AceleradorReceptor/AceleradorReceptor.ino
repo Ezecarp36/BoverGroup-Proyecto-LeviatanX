@@ -2,10 +2,10 @@
 #include <ESP32Servo.h>
 
 #define CE_PIN 27
-#define CSN_PIN 15
+#define CSN_PIN 17
 #define ADDRESS 1234
 
-#define PIN_MOTOR 27
+#define PIN_MOTOR 26
 Servo esc;
 int velocidad = 1000;
 
