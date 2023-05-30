@@ -19,11 +19,9 @@
 MPU6050 mpu;
 //MPU6050 mpu(0x69); // <-- use for AD0 high
 
-#define SDA 4
-#define SCL 5
-#define INTERRUPT_PIN 14
-
+#define INTERRUPT_PIN 16
 #define LED_PIN 2
+
 bool blinkState = false;
 
 // MPU control/status vars
@@ -49,7 +47,7 @@ void dmpDataReady() {
 void setup() {
     // join I2C bus (I2Cdev library doesn't do this automatically)
     #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
-        Wire.begin(SDA, SCL);
+        Wire.begin();
         Wire.setClock(400000); // 400kHz I2C clock. Comment this line if having compilation difficulties
     #elif I2CDEV_IMPLEMENTATION == I2CDEV_BUILTIN_FASTWIRE
         Fastwire::setup(400, true);
