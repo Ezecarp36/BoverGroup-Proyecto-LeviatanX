@@ -19,10 +19,9 @@
 MPU6050 mpu;
 //MPU6050 mpu(0x69); // <-- use for AD0 high
 
-
-#define INTERRUPT_PIN 23
-
+#define INTERRUPT_PIN 16
 #define LED_PIN 2
+
 bool blinkState = false;
 
 // MPU control/status vars
