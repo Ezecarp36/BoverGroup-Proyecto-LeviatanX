@@ -6,13 +6,13 @@
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
 #endif
 //CONSTANTES
-#define PIN_MOTOR 33
+#define PIN_MOTOR 25
 #define NIVEL_MOTOR_PARADO 0
-#define NIVEL_MOTOR_BAJO 1100
-#define NIVEL_MOTOR_MEDIOBAJO 1200
-#define NIVEL_MOTOR_MEDIOALTO 1400
-#define NIVEL_MOTOR_ALTO 1500
-#define DELAY_GIRO_MOTORES 3000
+#define NIVEL_MOTOR_BAJO 1000
+#define NIVEL_MOTOR_MEDIOBAJO 1300
+#define NIVEL_MOTOR_MEDIOALTO 1600
+#define NIVEL_MOTOR_ALTO 1800
+#define DELAY_GIRO_MOTORES 5000
 //VARIABLES
 bool sentido = 0;
 
