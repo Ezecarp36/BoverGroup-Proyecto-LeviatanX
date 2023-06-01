@@ -4,29 +4,30 @@
 #define CSN_PIN 10
 #define PIN_ACELERADOR A2
 #define ADDRESS 1234
-
-RF24 radio(CE_PIN, CSN_PIN);
+#define TICK_DEBUG 100
 
 unsigned long currentTime = 0;
-#define TICK_DEBUG 100
+
+RF24 radio(CE_PIN, CSN_PIN);
 
 void setup() {
   pinMode(PIN_ACELERADOR, INPUT);
   Serial.begin(9600);
-  Serial.println("StarSend");
   radio.begin();
   radio.setDataRate(RF24_250KBPS);
   radio.openWritingPipe(ADDRESS);
+  Serial.println("StartSend");
+  delay(3000);
 }
 
 void loop() {
-  int acelerador = analogRead(PIN_ACELERADOR);
-  int aceleradorMapeado = map(acelerador, 0, 1023, 2000, 1000); //Invierto la lectura del acelerador ya que el potenciometro esta al revez
-  radio.write(&aceleradorMapeado, sizeof(aceleradorMapeado));
+  int lecturaAcelerador = analogRead(PIN_ACELERADOR);
+  int lecturaAceleradorMapeado = map(lecturaAcelerador, 0, 1023, 2000, 1000); //Invierto la lectura del acelerador ya que el potenciometro esta al revez
+  radio.write(&lecturaAceleradorMapeado, sizeof(lecturaAceleradorMapeado));
   if (millis() > currentTime + TICK_DEBUG)
     {
         Serial.print("Acelerador: ");
-        Serial.println(aceleradorMapeado);
+        Serial.println(lecturaAceleradorMapeado);
         currentTime = millis();
     }
   
