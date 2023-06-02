@@ -14931,7 +14931,7 @@
     )
     (pin "1" (uuid 02a80d57-52eb-4a8e-8c73-ce894d70ec10))
     (instances
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "#PWR018") (unit 1)
         )
@@ -14982,7 +14982,7 @@
     (pin "S1" (uuid 2cc97684-c24a-4e39-aae3-b26b88eb2b3b))
     (pin "S2" (uuid 2dc10fa4-9657-4092-ae7a-0547ec987b72))
     (instances
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "J2") (unit 1)
         )
@@ -15006,7 +15006,7 @@
       (effects (font (size 1.524 1.524)) hide)
     )
     (instances
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "H2") (unit 1)
         )
@@ -15030,7 +15030,7 @@
       (effects (font (size 1.524 1.524)) hide)
     )
     (instances
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "H1") (unit 1)
         )
@@ -15060,7 +15060,7 @@
           (reference "#PWR016") (unit 1)
         )
       )
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "#PWR06") (unit 1)
         )
@@ -15090,7 +15090,7 @@
           (reference "#PWR026") (unit 1)
         )
       )
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "#PWR019") (unit 1)
         )
@@ -15122,7 +15122,7 @@
     (pin "7" (uuid 4b695ac5-0462-4884-8fba-f5fe8724964d))
     (pin "8" (uuid 00be569e-e657-4c79-8563-a291130ec144))
     (instances
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "U1") (unit 1)
         )
@@ -15152,7 +15152,7 @@
           (reference "#PWR026") (unit 1)
         )
       )
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "#PWR011") (unit 1)
         )
@@ -15169,7 +15169,7 @@
     (property "Value" "100nF" (at 58.928 59.182 0)
       (effects (font (size 1.016 1.016)) (justify left))
     )
-    (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 58.6232 60.452 0)
+    (property "Footprint" "EESTN5:C_0805" (at 58.6232 60.452 0)
       (effects (font (size 0.762 0.762)) hide)
     )
     (property "Datasheet" "" (at 57.658 56.642 0)
@@ -15183,7 +15183,7 @@
           (reference "C8") (unit 1)
         )
       )
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "C7") (unit 1)
         )
@@ -15213,7 +15213,7 @@
           (reference "#PWR015") (unit 1)
         )
       )
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "#PWR04") (unit 1)
         )
@@ -15230,7 +15230,7 @@
     (property "Value" "10uF" (at 51.562 59.436 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder" (at 50.7492 60.452 0)
+    (property "Footprint" "EESTN5:C_0805" (at 50.7492 60.452 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 49.784 56.642 0)
@@ -15244,7 +15244,7 @@
           (reference "C7") (unit 1)
         )
       )
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "C5") (unit 1)
         )
@@ -15274,7 +15274,7 @@
           (reference "#PWR023") (unit 1)
         )
       )
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "#PWR010") (unit 1)
         )
@@ -15340,7 +15340,7 @@
     (pin "8" (uuid 52fd0ca9-1734-4970-afca-c1a25f53e041))
     (pin "9" (uuid 2abfc2c7-0929-4d2a-8caa-a07062259b7f))
     (instances
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "U2") (unit 1)
         )
@@ -15370,7 +15370,7 @@
           (reference "#PWR025") (unit 1)
         )
       )
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "#PWR015") (unit 1)
         )
@@ -15400,7 +15400,7 @@
           (reference "#PWR025") (unit 1)
         )
       )
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "#PWR013") (unit 1)
         )
@@ -15417,7 +15417,7 @@
     (property "Value" "100nF" (at 29.718 59.182 0)
       (effects (font (size 1.016 1.016)) (justify left))
     )
-    (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 29.4132 60.452 0)
+    (property "Footprint" "EESTN5:C_0805" (at 29.4132 60.452 0)
       (effects (font (size 0.762 0.762)) hide)
     )
     (property "Datasheet" "" (at 28.448 56.642 0)
@@ -15431,7 +15431,7 @@
           (reference "C6") (unit 1)
         )
       )
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "C3") (unit 1)
         )
@@ -15455,7 +15455,7 @@
       (effects (font (size 1.524 1.524)) hide)
     )
     (instances
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "H4") (unit 1)
         )
@@ -15485,7 +15485,7 @@
           (reference "#PWR026") (unit 1)
         )
       )
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "#PWR02") (unit 1)
         )
@@ -15515,7 +15515,7 @@
           (reference "#PWR025") (unit 1)
         )
       )
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "#PWR012") (unit 1)
         )
@@ -15539,7 +15539,7 @@
       (effects (font (size 1.524 1.524)) hide)
     )
     (instances
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "H3") (unit 1)
         )
@@ -15569,7 +15569,7 @@
           (reference "#PWR016") (unit 1)
         )
       )
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "#PWR014") (unit 1)
         )
@@ -15601,7 +15601,7 @@
           (reference "U3") (unit 1)
         )
       )
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "U4") (unit 1)
         )
@@ -15618,7 +15618,7 @@
     (property "Value" "10uF" (at 15.24 59.69 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder" (at 23.0632 60.452 0)
+    (property "Footprint" "EESTN5:C_0805" (at 23.0632 60.452 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 22.098 56.642 0)
@@ -15632,7 +15632,7 @@
           (reference "C5") (unit 1)
         )
       )
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "C1") (unit 1)
         )
@@ -15658,7 +15658,7 @@
     (pin "1" (uuid 4b1e6dac-3158-4db7-86bb-41cae95c6913))
     (pin "2" (uuid 79935c22-b886-44f5-bf4b-5d892e82b852))
     (instances
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "J1") (unit 1)
         )
@@ -15688,7 +15688,7 @@
           (reference "#PWR022") (unit 1)
         )
       )
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "#PWR09") (unit 1)
         )
@@ -15725,7 +15725,7 @@
           (reference "U2") (unit 1)
         )
       )
-      (project "PCB-Controladora-Vuelo"
+      (project "PCB_Controladora_Vuelo_V2"
         (path "/ac5864b2-231c-45bd-8efa-594ea27cde2d"
           (reference "U3") (unit 1)
         )
