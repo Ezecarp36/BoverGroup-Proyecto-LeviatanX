@@ -9,10 +9,16 @@
 #define CE_PIN 27
 #define CSN_PIN 17
 #define ADDRESS 1234
-#define PIN_MOTOR 33
+#define PIN_MOTOR_1 32
+#define PIN_MOTOR_2 33
+#define PIN_MOTOR_3 25
 #define TICK_DEBUG 100
+#define VELOCIDAD_ESCALADA 10
+#define VELOCIDAD_MAXIMA 2000
 
-int velocidad = 1000;
+
+int velocidad_actual ;
+int velocidad_anterior;
 unsigned long currentTime = 0;
 
 BluetoothSerial SerialBT;
@@ -22,7 +28,7 @@ Servo motor1;
 void setup() {
   Serial.begin(9600);
   SerialBT.begin();
-  motor1.attach(PIN_MOTOR);
+  motor1.attach(PIN_MOTOR_1);
   radio.begin();
   radio.setDataRate(RF24_250KBPS);
   radio.openReadingPipe(1, ADDRESS);
@@ -33,16 +39,21 @@ void setup() {
 }
 
 void loop() {
+  
   if (radio.available()) 
   {
-    radio.read(&velocidad, sizeof(velocidad));
-    if (velocidad > 1900) velocidad = 1900;
-    motor1.writeMicroseconds(velocidad);
+    radio.read(&velocidad_actual, sizeof(velocidad_actual));
+    if (velocidad_actual < velocidad_anterior + VELOCIDAD_ESCALADA || velocidad_actual < velocidad_anterior - VELOCIDAD_ESCALADA){
+      velocidad_actual = velocidad_anterior;
+    }
+    if (velocidad_actual > VELOCIDAD_MAXIMA) velocidad_actual = VELOCIDAD_MAXIMA;
+    motor1.writeMicroseconds(velocidad_actual);
     if (millis() > currentTime + TICK_DEBUG)
     {
       SerialBT.print("Acelerador recibido: ");
-      SerialBT.println(velocidad);
+      SerialBT.println(velocidad_actual);
       currentTime = millis();
     }
+    velocidad_anterior = velocidad_actual;
   }
 }
