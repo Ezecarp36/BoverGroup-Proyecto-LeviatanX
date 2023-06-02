@@ -13,7 +13,7 @@
 #define PIN_MOTOR_2 33
 #define PIN_MOTOR_3 25
 #define TICK_DEBUG 100
-#define VELOCIDAD_ESCALADA 10
+#define VELOCIDAD_ESCALADA 5
 #define VELOCIDAD_MAXIMA 2000
 
 
@@ -43,10 +43,10 @@ void loop() {
   if (radio.available()) 
   {
     radio.read(&velocidad_actual, sizeof(velocidad_actual));
-    if (velocidad_actual < velocidad_anterior + VELOCIDAD_ESCALADA || velocidad_actual < velocidad_anterior - VELOCIDAD_ESCALADA){
+    if (velocidad_actual < (velocidad_anterior - VELOCIDAD_ESCALADA) || velocidad_actual > (velocidad_anterior + VELOCIDAD_ESCALADA)){
       velocidad_actual = velocidad_anterior;
     }
-    if (velocidad_actual > VELOCIDAD_MAXIMA) velocidad_actual = VELOCIDAD_MAXIMA;
+    if (velocidad_actual >= VELOCIDAD_MAXIMA) velocidad_actual = VELOCIDAD_MAXIMA;
     motor1.writeMicroseconds(velocidad_actual);
     if (millis() > currentTime + TICK_DEBUG)
     {
