@@ -17,7 +17,7 @@
 #define VELOCIDAD_MAXIMA 2000
 
 
-int velocidad_actual ;
+int velocidad = 1000 ;
 int velocidad_anterior;
 unsigned long currentTime = 0;
 
@@ -41,19 +41,29 @@ void setup() {
 void loop() {
   
   if (radio.available()) 
-  {
-    radio.read(&velocidad_actual, sizeof(velocidad_actual));
-    if (velocidad_actual < (velocidad_anterior - VELOCIDAD_ESCALADA) || velocidad_actual > (velocidad_anterior + VELOCIDAD_ESCALADA)){
-      velocidad_actual = velocidad_anterior;
+  {   
+    radio.read(&velocidad, sizeof(velocidad));
+
+    int velocidad_actual = velocidad; 
+    if (velocidad_actual > velocidad_anterior + VELOCIDAD_ESCALADA ){
+      velocidad_anterior = velocidad_actual;
     }
-    if (velocidad_actual >= VELOCIDAD_MAXIMA) velocidad_actual = VELOCIDAD_MAXIMA;
+    else if (velocidad_actual > velocidad_anterior - VELOCIDAD_ESCALADA){
+      velocidad_anterior = velocidad_actual;
+    }
+    velocidad_anterior = velocidad_actual;
+    if (velocidad_actual > VELOCIDAD_MAXIMA) velocidad_actual = VELOCIDAD_MAXIMA;
+    
     motor1.writeMicroseconds(velocidad_actual);
+
     if (millis() > currentTime + TICK_DEBUG)
     {
       SerialBT.print("Acelerador recibido: ");
+      SerialBT.println(velocidad);
+      SerialBT.print("Acelerador escalado: ");
       SerialBT.println(velocidad_actual);
       currentTime = millis();
     }
-    velocidad_anterior = velocidad_actual;
+    
   }
 }
