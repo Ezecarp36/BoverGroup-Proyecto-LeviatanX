@@ -7,6 +7,8 @@
 #define TICK_DEBUG 100
 
 unsigned long currentTime = 0;
+int muestras = 10;
+int sum = 0;
 
 RF24 radio(CE_PIN, CSN_PIN);
 
@@ -21,8 +23,15 @@ void setup() {
 }
 
 void loop() {
-  int lecturaAcelerador = analogRead(PIN_ACELERADOR);
-  int lecturaAceleradorMapeado = map(lecturaAcelerador, 0, 1023, 2000, 1000); //Invierto la lectura del acelerador ya que el potenciometro esta al revez
+  for(int i=0; i < muestras; i++){
+    int lectura = analogRead(PIN_ACELERADOR);
+    sum += lectura;
+    delay(10);
+  }
+  int valorFiltrado = sum / muestras;
+  sum = 0;
+  int lecturaAceleradorMapeado = map(valorFiltrado, 0, 1023, 2000, 1000); //Invierto la lectura del acelerador ya que el potenciometro esta al revez
+  
   radio.write(&lecturaAceleradorMapeado, sizeof(lecturaAceleradorMapeado));
   if (millis() > currentTime + TICK_DEBUG)
     {
