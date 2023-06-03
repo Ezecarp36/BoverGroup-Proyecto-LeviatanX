@@ -9,7 +9,7 @@
 #define CE_PIN 27
 #define CSN_PIN 17
 #define ADDRESS 1234
-#define PIN_MOTOR_1 32
+#define PIN_MOTOR_1 26
 #define PIN_MOTOR_2 33
 #define PIN_MOTOR_3 25
 #define TICK_DEBUG 100
@@ -33,7 +33,7 @@ void setup() {
   radio.setDataRate(RF24_250KBPS);
   radio.openReadingPipe(1, ADDRESS);
   radio.startListening();
-  SerialBT.begin("ESP32test"); //Bluetooth device name
+  SerialBT.begin("LeviatanX"); //Bluetooth device name
   SerialBT.println("Start Bluetooth");
   delay(3000);
 }
