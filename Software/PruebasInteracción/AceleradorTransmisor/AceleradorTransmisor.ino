@@ -35,13 +35,13 @@ void loop() {
   aceleradorMapeado = map(acelerador, 0, 1023, 2000, 1000); //Invierto la lectura del acelerador ya que el potenciometro esta al revez
   
   aceleradorActual = aceleradorMapeado;
-    if (aceleradorActual > aceleradorAnterior + ACELERADOR_UMBRAL || aceleradorActual < aceleradorAnterior - ACELERADOR_UMBRAL) 
-      aceleradorActual = aceleradorActual;
+  if (aceleradorActual > aceleradorAnterior + ACELERADOR_UMBRAL || aceleradorActual < aceleradorAnterior - ACELERADOR_UMBRAL) 
+    aceleradorActual = aceleradorActual;
 
-    else 
-      aceleradorActual = aceleradorAnterior;
+  else 
+    aceleradorActual = aceleradorAnterior;
     
-    aceleradorAnterior = aceleradorActual;
+  aceleradorAnterior = aceleradorActual;
 
   
   radio.write(&aceleradorActual, sizeof(aceleradorActual));
