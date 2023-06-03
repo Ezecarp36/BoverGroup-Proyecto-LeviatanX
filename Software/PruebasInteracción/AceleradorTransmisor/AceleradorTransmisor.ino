@@ -31,7 +31,7 @@ void setup() {
 
 void loop() {
   
-  acelerador = analogRead(PIN_ACELERADOR);// añmacenamos lectura del pin del acelerador en var acelerador
+  acelerador = analogRead(PIN_ACELERADOR);// almacenamos lectura del pin del acelerador en var acelerador
 
   aceleradorMapeado = map(acelerador, 0, 1023, 2000, 1000); //Invierto la lectura del acelerador ya que el potenciometro esta al revez
   
