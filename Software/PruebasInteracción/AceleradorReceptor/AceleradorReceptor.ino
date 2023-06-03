@@ -44,7 +44,6 @@ void setup() {
   motor2.attach(PIN_MOTOR_2);
   motor3.attach(PIN_MOTOR_3);
   motor4.attach(PIN_MOTOR_4);
-
   //nombre bluetooth y mensaje
   SerialBT.begin("LeviatanX"); //Bluetooth device name
   SerialBT.println("Start Bluetooth");
