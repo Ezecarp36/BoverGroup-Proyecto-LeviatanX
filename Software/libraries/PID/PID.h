@@ -7,6 +7,7 @@ class Pid
     private:
     double kp = 0;
     double kd = 0;
+    double ki = 0;
     double error;
     double lastError;
     double Input = 0;
