@@ -19,11 +19,13 @@
 #define VELOCIDAD_ESCALADA 3
 #define VELOCIDAD_MAXIMA 1800
 
+//variables
+double input = 0.0;
+double setpoint = 0.0;
+
 
 //inicializo objetos
 MPU6050 mpu;
-
-bool blinkState = false;
 
 // MPU control/status vars
 bool dmpReady = false;  // set true if DMP init was successful
@@ -46,7 +48,7 @@ void dmpDataReady() {
 }
 
 void setup() {
-    // join I2C bus (I2Cdev library doesn't do this automatically)
+    // inicializar I2C con MPU6050 en biblioteca I2Cdev se utiliza la biblioteca Wire o Fastwire para establecer la comunicación y configurar la frecuencia de reloj del bus I2C.
     #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
         Wire.begin();
         Wire.setClock(400000); // 400kHz I2C clock. Comment this line if having compilation difficulties
@@ -55,38 +57,30 @@ void setup() {
     #endif
 
     Serial.begin(9600);
-
     // Iniciar MPU6050
     Serial.println(F("Initializing I2C devices..."));
     mpu.initialize();
     pinMode(PIN_INTERRUPT, INPUT);
-
     // Comprobar  conexion
     Serial.println(F("Testing device connections..."));
     Serial.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
-
     // Iniciar DMP
     Serial.println(F("Initializing DMP..."));
     devStatus = mpu.dmpInitialize();
-
     // Valores de calibracion
     mpu.setXGyroOffset(220);
     mpu.setYGyroOffset(76);
     mpu.setZGyroOffset(-85);
     mpu.setZAccelOffset(1688);
-
     // Activar DMP
     if (devStatus == 0) {
         Serial.println(F("Enabling DMP..."));
         mpu.setDMPEnabled(true);
-
         // Activar interrupcion
         attachInterrupt(digitalPinToInterrupt(PIN_INTERRUPT), dmpDataReady, RISING);
         mpuIntStatus = mpu.getIntStatus();
-
         Serial.println(F("DMP ready! Waiting for first interrupt..."));
         dmpReady = true;
-
         // get expected DMP packet size for later comparison
         packetSize = mpu.dmpGetFIFOPacketSize();
     } else {
@@ -107,6 +101,8 @@ void loop() {
     // Ejecutar mientras no hay interrupcion
     while (!mpuInterrupt && fifoCount < packetSize) {
         // AQUI EL RESTO DEL CODIGO DE TU PROGRRAMA
+
+
     }
 
     mpuInterrupt = false;

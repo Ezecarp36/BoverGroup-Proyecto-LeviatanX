@@ -1,27 +1,38 @@
 #include "PID.h"
 
 
-Pid::Pid(double p, double d,double sp, double tick)
+Pid::Pid(double p, double i, double d,double sp, double tick)
 {
     kp = p;
-    kd = d;
+    ti = i;
+    td = d;
     setPoint = sp;
-    TICK_PID = tick;
+    tick_pid = tick;
 }
 
 
 double Pid::ComputePid(double inp)
 {
-    if(millis() > currentTimePID + TICK_PID)
+    if(millis() > currentTimePID + tick_pid)
     {
         currentTimePID = millis();
-        Input = inp;
-        error = Input - setPoint;
-        deltaError = error - lastError;
-        double out = kp * error + kd * deltaError;
+        input = inp;
+        error = input - setPoint;
+        if (integral < integralMin){
+            integral = integralMin;
+        }
+        else if (integral > integralMax){
+            integral = integralMax;
+        }
+        else 
+            integral += error;
+
+        derivada = error - lastError;
+        double out = kp * error+ ti * integral + td * derivada;
         lastError = error;
 
         return out;
     }
+    else return 0.0;
     
 }

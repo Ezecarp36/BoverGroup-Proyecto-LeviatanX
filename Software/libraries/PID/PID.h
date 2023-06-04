@@ -6,16 +6,18 @@ class Pid
 {
     private:
     double kp = 0;
-    double kd = 0;
-    double ki = 0;
+    double ti = 0;
+    double td = 0;
     double error;
     double lastError;
-    double Input = 0;
+    double input = 0;
     double output = 0; 
     double setPoint = 0;
-    double deltaError;
-    unsigned long currentTimePID = 0;
-    int TICK_PID = 70;
+    double derivada;
+    double integral;
+    double integralMin;
+    double integralMax;
+    int tick_pid;
 
     public:
     Pid(double p, double d,double sp, double tick);
