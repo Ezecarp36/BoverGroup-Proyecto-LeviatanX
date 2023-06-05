@@ -31,16 +31,19 @@ double input = 0.0;
 double setpoint_pitch = 0.0;
 double kp_pitch = 0.2, ti_pitch = 0.2, td_pitch = 0.2;
 int pitch,yaw,roll;
-int velocidad_pitch= 1000;
+int velocidad_pitch= 1300;
 bool estado_boton;
-
+int velocidad_pitch_aumenta, velocidad_pitch_disminuye;
+int resultadoPidPitch;
 
 enum state {
     ESPERA,
     INICIO_DE_VUELO,
     PRUEBA_PID
 };
+int state = ESPERA;
 //inicializo objetos
+BluetoothSerial SerialBT;
 MPU6050 mpu;
 Pid *calculo_pid_pitch = new Pid(kp_pitch, ti_pitch, td_pitch, setpoint_pitch, TICK_PID_PITCH);
 Servo motor1;
@@ -69,7 +72,6 @@ void dmpDataReady() {
 }
 
 void setup() {
-    SerialBT.begin();
     // inicializar I2C con MPU6050 en biblioteca I2Cdev se utiliza la biblioteca Wire o Fastwire para establecer la comunicación y configurar la frecuencia de reloj del bus I2C.
     #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
         Wire.begin();
@@ -132,10 +134,10 @@ void loop() {
     // Ejecutar mientras no hay interrupcion
     while (!mpuInterrupt && fifoCount < packetSize) {
         // AQUI EL RESTO DEL CODIGO DE TU PROGRRAMA
-        int resultadoPidPitch = calculo_pid_pitch->ComputePid(pitch);
+        resultadoPidPitch = calculo_pid_pitch->ComputePid(pitch);
         switch (state)
         {
-        case ESPERA:
+        case ESPERA:{
             velocidad_pitch = NIVEL_MOTOR_PARADO;
             motor1.writeMicroseconds(velocidad_pitch);
             motor2.writeMicroseconds(velocidad_pitch);
@@ -145,8 +147,8 @@ void loop() {
                 state = INICIO_DE_VUELO;
             }        
             break;
-        
-        case INICIO_DE_VUELO:
+        }
+        case INICIO_DE_VUELO:{
                 for (int i = 1000; i < 1800; i= i+25) 
                 {
                     motor1.writeMicroseconds(i);
@@ -159,8 +161,8 @@ void loop() {
                     } 
                 }
             break;
-        
-        case PRUEBA_PID:
+        }
+        case PRUEBA_PID:{
             if(pitch > 0 ){
                 velocidad_pitch_aumenta = velocidad_pitch + resultadoPidPitch;
                 velocidad_pitch_disminuye = velocidad_pitch - resultadoPidPitch;
@@ -185,6 +187,7 @@ void loop() {
                 motor4.writeMicroseconds(velocidad_pitch); 
             }
             break;
+        }
         }
     }
 

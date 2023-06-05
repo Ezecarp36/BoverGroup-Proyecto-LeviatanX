@@ -18,7 +18,8 @@ class Pid
     double integralMin;
     double integralMax;
     int tick_pid;
-
+    unsigned long currentTimePID;
+    
     public:
     Pid(double p, double i, double d,double sp, double tick);
     double ComputePid(double inp);
