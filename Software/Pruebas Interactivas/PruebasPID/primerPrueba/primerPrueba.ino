@@ -1,6 +1,7 @@
 #include "PID.h"
 #include "I2Cdev.h"
 #include "MPU6050_6Axis_MotionApps20.h"
+#include <ESP32Servo.h>
 #include "BluetoothSerial.h"
 #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
     #include "Wire.h"
@@ -19,16 +20,33 @@
 #define VELOCIDAD_ESCALADA 3
 #define VELOCIDAD_MAXIMA 1800
 #define TICK_PID_PITCH 10
+#define NIVEL_MOTOR_PARADO 0
+#define NIVEL_MOTOR_BAJO 1200
+#define NIVEL_MOTOR_MEDIOBAJO 1400
+#define NIVEL_MOTOR_MEDIOALTO 1600
+#define NIVEL_MOTOR_ALTO 1800
 
 //variables
 double input = 0.0;
 double setpoint_pitch = 0.0;
 double kp_pitch = 0.2, ti_pitch = 0.2, td_pitch = 0.2;
 int pitch,yaw,roll;
+int velocidad_pitch= 1000;
+bool estado_boton;
 
+
+enum state {
+    ESPERA,
+    INICIO_DE_VUELO,
+    PRUEBA_PID
+};
 //inicializo objetos
 MPU6050 mpu;
-Pid pid_pitch;
+Pid *calculo_pid_pitch = new Pid(kp_pitch, ti_pitch, td_pitch, setpoint_pitch, TICK_PID_PITCH);
+Servo motor1;
+Servo motor2;
+Servo motor3;
+Servo motor4;
 
 // MPU control/status vars
 bool dmpReady = false;  // set true if DMP init was successful
@@ -51,6 +69,7 @@ void dmpDataReady() {
 }
 
 void setup() {
+    SerialBT.begin();
     // inicializar I2C con MPU6050 en biblioteca I2Cdev se utiliza la biblioteca Wire o Fastwire para establecer la comunicación y configurar la frecuencia de reloj del bus I2C.
     #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
         Wire.begin();
@@ -60,10 +79,18 @@ void setup() {
     #endif
 
     Serial.begin(9600);
+    //nombre bluetooth y mensaje
+    SerialBT.begin("LeviatanX"); //Bluetooth device name
+    SerialBT.println("Start Bluetooth");
+    delay(3000);
     // Iniciar MPU6050
     Serial.println(F("Initializing I2C devices..."));
-    pid_pitch.Pid(kp_pitch,ti_pitch, td_pitch, setpoint_pitch, TICK_PID_PITCH);
     mpu.initialize();
+    //configuramos motores
+    motor1.attach(PIN_MOTOR_1);  // Inicializa el motor brushless en el pin correspondiente
+    motor2.attach(PIN_MOTOR_2);
+    motor3.attach(PIN_MOTOR_3);
+    motor4.attach(PIN_MOTOR_4);
     pinMode(PIN_INTERRUPT, INPUT);
     // Comprobar  conexion
     Serial.println(F("Testing device connections..."));
@@ -105,8 +132,60 @@ void loop() {
     // Ejecutar mientras no hay interrupcion
     while (!mpuInterrupt && fifoCount < packetSize) {
         // AQUI EL RESTO DEL CODIGO DE TU PROGRRAMA
-        pid_pitch.ComputePid(pitch);
-
+        int resultadoPidPitch = calculo_pid_pitch->ComputePid(pitch);
+        switch (state)
+        {
+        case ESPERA:
+            velocidad_pitch = NIVEL_MOTOR_PARADO;
+            motor1.writeMicroseconds(velocidad_pitch);
+            motor2.writeMicroseconds(velocidad_pitch);
+            motor3.writeMicroseconds(velocidad_pitch);
+            motor4.writeMicroseconds(velocidad_pitch); 
+            if (digitalRead(estado_boton)){
+                state = INICIO_DE_VUELO;
+            }        
+            break;
+        
+        case INICIO_DE_VUELO:
+                for (int i = 1000; i < 1800; i= i+25) 
+                {
+                    motor1.writeMicroseconds(i);
+                    motor2.writeMicroseconds(i);
+                    motor3.writeMicroseconds(i);
+                    motor4.writeMicroseconds(i);
+                    delay(500);
+                    if (i >= 1800){
+                      state = PRUEBA_PID;
+                    } 
+                }
+            break;
+        
+        case PRUEBA_PID:
+            if(pitch > 0 ){
+                velocidad_pitch_aumenta = velocidad_pitch + resultadoPidPitch;
+                velocidad_pitch_disminuye = velocidad_pitch - resultadoPidPitch;
+                motor1.writeMicroseconds(velocidad_pitch_aumenta);
+                motor2.writeMicroseconds(velocidad_pitch_disminuye);
+                motor3.writeMicroseconds(velocidad_pitch_aumenta);
+                motor4.writeMicroseconds(velocidad_pitch_disminuye);
+            }
+            else if(pitch < 0){
+                velocidad_pitch_aumenta = velocidad_pitch + resultadoPidPitch;
+                velocidad_pitch_disminuye = velocidad_pitch - resultadoPidPitch;
+                motor1.writeMicroseconds(velocidad_pitch_disminuye);
+                motor2.writeMicroseconds(velocidad_pitch_aumenta);
+                motor3.writeMicroseconds(velocidad_pitch_disminuye);
+                motor4.writeMicroseconds(velocidad_pitch_aumenta);
+            }
+            else {
+                velocidad_pitch = 1300;
+                motor1.writeMicroseconds(velocidad_pitch);
+                motor2.writeMicroseconds(velocidad_pitch);
+                motor3.writeMicroseconds(velocidad_pitch);
+                motor4.writeMicroseconds(velocidad_pitch); 
+            }
+            break;
+        }
     }
 
     mpuInterrupt = false;
