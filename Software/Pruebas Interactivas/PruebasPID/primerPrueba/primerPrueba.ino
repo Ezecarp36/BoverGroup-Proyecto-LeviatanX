@@ -30,6 +30,7 @@
 #define CALIBRACION_YGYROOFFSET 76
 #define CALIBRACION_ZGYROOFFSET -85
 #define CALIBRACION_ZACCELOFFSET 1688
+
 // variables
 double input = 0.0;
 double setpoint_pitch = 0.0;
@@ -182,7 +183,7 @@ void loop()
         }
         case PRUEBA_PID:
         {
-            if (pitch > 0)
+            if (pitch > setpoint_pitch)
             {
                 velocidad_pitch_aumenta = velocidad_pitch + resultadoPidPitch;
                 velocidad_pitch_disminuye = velocidad_pitch - resultadoPidPitch;
@@ -191,7 +192,7 @@ void loop()
                 motor3.writeMicroseconds(velocidad_pitch_aumenta);
                 motor4.writeMicroseconds(velocidad_pitch_disminuye);
             }
-            else if (pitch < 0)
+            else if (pitch < setpoint_pitch)
             {
                 velocidad_pitch_aumenta = velocidad_pitch + resultadoPidPitch;
                 velocidad_pitch_disminuye = velocidad_pitch - resultadoPidPitch;
@@ -252,7 +253,7 @@ void loop()
         SerialBT.print("\t");
         SerialBT.println(roll);
 
-        delay(50);
+        delay(10);
         // Mostrar aceleracion
         // mpu.dmpGetQuaternion(&q, fifoBuffer);
         // mpu.dmpGetAccel(&aa, fifoBuffer);
