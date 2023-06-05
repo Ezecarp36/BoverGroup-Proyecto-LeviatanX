@@ -160,7 +160,7 @@ void loop()
         if (radio.available()) // si hay comunicacion recibe mensaje
         {
             radio.read(&estado_boton, sizeof(estado_boton)); // recibe mensaje
-
+            bool lectura_boton = digitalRead(estado_boton);
             resultadoPidPitch = calculo_pid_pitch->ComputePid(pitch);
             switch (state)
             {
@@ -171,14 +171,15 @@ void loop()
                 motor2.writeMicroseconds(velocidad_pitch);
                 motor3.writeMicroseconds(velocidad_pitch);
                 motor4.writeMicroseconds(velocidad_pitch);
-                if (digitalRead(estado_boton))
+                if (lectura_boton)
                 {
                     state = INICIO_DE_VUELO;
                 }
                 break;
             }
             case INICIO_DE_VUELO:
-            {
+            {   
+
                 for (int i = 1000; i < 1800; i = i + 25)
                 {
                     motor1.writeMicroseconds(i);
@@ -190,6 +191,10 @@ void loop()
                     {
                         state = PRUEBA_PID;
                     }
+                }
+                if (lectura_boton == 0)
+                {
+                    state = ESPERA;
                 }
                 break;
             }
@@ -220,6 +225,10 @@ void loop()
                     motor2.writeMicroseconds(velocidad_pitch);
                     motor3.writeMicroseconds(velocidad_pitch);
                     motor4.writeMicroseconds(velocidad_pitch);
+                }
+                if (lectura_boton == 0)
+                {
+                    state = ESPERA;
                 }
                 break;
             }
