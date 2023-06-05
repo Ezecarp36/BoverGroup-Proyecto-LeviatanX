@@ -2,7 +2,7 @@
 #include "I2Cdev.h"
 #include "MPU6050_6Axis_MotionApps20.h"
 #include <ESP32Servo.h>
-#include "BluetoothSerial.h"
+#include "BluetoothSerialBT.h"
 #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
     #include "Wire.h"
 #endif
@@ -11,6 +11,7 @@
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
 #endif
 
+//constantes
 #define PIN_MOTOR_1 32
 #define PIN_MOTOR_2 33
 #define PIN_MOTOR_3 25
@@ -25,16 +26,20 @@
 #define NIVEL_MOTOR_MEDIOBAJO 1400
 #define NIVEL_MOTOR_MEDIOALTO 1600
 #define NIVEL_MOTOR_ALTO 1800
-
+#define CALIBRACION_XGYROOFFSET 220
+#define CALIBRACION_YGYROOFFSET 76
+#define CALIBRACION_ZGYROOFFSET -85
+#define CALIBRACION_ZACCELOFFSET 1688
 //variables
 double input = 0.0;
 double setpoint_pitch = 0.0;
 double kp_pitch = 0.2, ti_pitch = 0.2, td_pitch = 0.2;
 int pitch,yaw,roll;
-int velocidad_pitch= 1300;
+int velocidad_pitch= 0;
 bool estado_boton;
 int velocidad_pitch_aumenta, velocidad_pitch_disminuye;
 int resultadoPidPitch;
+
 
 enum state {
     ESPERA,
@@ -42,6 +47,7 @@ enum state {
     PRUEBA_PID
 };
 int state = ESPERA;
+
 //inicializo objetos
 BluetoothSerial SerialBT;
 MPU6050 mpu;
@@ -51,14 +57,13 @@ Servo motor2;
 Servo motor3;
 Servo motor4;
 
-// MPU control/status vars
+// Variables de estado y control MPU
 bool dmpReady = false;  // set true if DMP init was successful
 uint8_t mpuIntStatus;   // holds actual interrupt status byte from MPU
 uint8_t devStatus;      // return status after each device operation (0 = success, !0 = error)
 uint16_t packetSize;    // expected DMP packet size (default is 42 bytes)
 uint16_t fifoCount;     // count of all bytes currently in FIFO
 uint8_t fifoBuffer[64]; // FIFO storage buffer
-
 Quaternion q;           // [w, x, y, z]
 VectorInt16 aa;         // [x, y, z]
 VectorInt16 aaReal;     // [x, y, z]
@@ -66,6 +71,7 @@ VectorInt16 aaWorld;    // [x, y, z]
 VectorFloat gravity;    // [x, y, z]
 float ypr[3];           // [yaw, pitch, roll]
 
+//FUNCION QUE CAMBIA A ALTO CUANDO INT RECIBE DATOS DE LA MPU E INTERRUMPE uC
 volatile bool mpuInterrupt = false;
 void dmpDataReady() {
     mpuInterrupt = true;
@@ -86,7 +92,7 @@ void setup() {
     SerialBT.println("Start Bluetooth");
     delay(3000);
     // Iniciar MPU6050
-    Serial.println(F("Initializing I2C devices..."));
+    SerialBT.println(F("Initializing I2C devices..."));
     mpu.initialize();
     //configuramos motores
     motor1.attach(PIN_MOTOR_1);  // Inicializa el motor brushless en el pin correspondiente
@@ -95,24 +101,24 @@ void setup() {
     motor4.attach(PIN_MOTOR_4);
     pinMode(PIN_INTERRUPT, INPUT);
     // Comprobar  conexion
-    Serial.println(F("Testing device connections..."));
-    Serial.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
+    SerialBT.println(F("Testing device connections..."));
+    SerialBT.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
     // Iniciar DMP
-    Serial.println(F("Initializing DMP..."));
+    SerialBT.println(F("Initializing DMP..."));
     devStatus = mpu.dmpInitialize();
     // Valores de calibracion
-    mpu.setXGyroOffset(220);
-    mpu.setYGyroOffset(76);
-    mpu.setZGyroOffset(-85);
-    mpu.setZAccelOffset(1688);
+    mpu.setXGyroOffset(CALIBRACION_XGYROOFFSET);
+    mpu.setYGyroOffset(CALIBRACION_YGYROOFFSET);
+    mpu.setZGyroOffset(CALIBRACION_ZGYROOFFSET);
+    mpu.setZAccelOffset(CALIBRACION_ZACCELOFFSET);
     // Activar DMP
     if (devStatus == 0) {
-        Serial.println(F("Enabling DMP..."));
+        SerialBT.println(F("Enabling DMP..."));
         mpu.setDMPEnabled(true);
         // Activar interrupcion
         attachInterrupt(digitalPinToInterrupt(PIN_INTERRUPT), dmpDataReady, RISING);
         mpuIntStatus = mpu.getIntStatus();
-        Serial.println(F("DMP ready! Waiting for first interrupt..."));
+        SerialBT.println(F("DMP ready! Waiting for first interrupt..."));
         dmpReady = true;
         // get expected DMP packet size for later comparison
         packetSize = mpu.dmpGetFIFOPacketSize();
@@ -121,9 +127,9 @@ void setup() {
         // 1 = initial memory load failed
         // 2 = DMP configuration updates failed
         // (if it's going to break, usually the code will be 1)
-        Serial.print(F("DMP Initialization failed (code "));
-        Serial.print(devStatus);
-        Serial.println(F(")"));
+        SerialBT.print(F("DMP Initialization failed (code "));
+        SerialBT.print(devStatus);
+        SerialBT.println(F(")"));
     }
 }
 
@@ -156,7 +162,7 @@ void loop() {
                     motor3.writeMicroseconds(i);
                     motor4.writeMicroseconds(i);
                     delay(500);
-                    if (i >= 1800){
+                    if (i >= 1400){
                       state = PRUEBA_PID;
                     } 
                 }
@@ -180,7 +186,7 @@ void loop() {
                 motor4.writeMicroseconds(velocidad_pitch_aumenta);
             }
             else {
-                velocidad_pitch = 1300;
+                velocidad_pitch = 1400;
                 motor1.writeMicroseconds(velocidad_pitch);
                 motor2.writeMicroseconds(velocidad_pitch);
                 motor3.writeMicroseconds(velocidad_pitch);
@@ -200,7 +206,7 @@ void loop() {
     // Controlar overflow
     if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
         mpu.resetFIFO();
-        Serial.println(F("FIFO overflow!"));
+        SerialBT.println(F("FIFO overflow!"));
     } 
     else if (mpuIntStatus & 0x02) {
         // wait for correct available data length, should be a VERY short wait
@@ -220,12 +226,12 @@ void loop() {
   yaw = ypr[0] * 180/M_PI;
   pitch = ypr[1] * 180/M_PI;
   roll = ypr[2] * 180/M_PI;
-  Serial.print("ypr\t");
-  Serial.print(yaw);
-  Serial.print("\t");
-  Serial.print(pitch);
-  Serial.print("\t");
-  Serial.println(roll);
+  SerialBT.print("ypr\t");
+  SerialBT.print(yaw);
+  SerialBT.print("\t");
+  SerialBT.print(pitch);
+  SerialBT.print("\t");
+  SerialBT.println(roll);
   
   delay(50);
   // Mostrar aceleracion
@@ -233,11 +239,11 @@ void loop() {
   // mpu.dmpGetAccel(&aa, fifoBuffer);
   // mpu.dmpGetGravity(&gravity, &q);
   // mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
-  // Serial.print("areal\t");
-  // Serial.print(aaReal.x);
-  // Serial.print("\t");
-  // Serial.print(aaReal.y);
-  // Serial.print("\t");
-  // Serial.println(aaReal.z);
+  // SerialBT.print("areal\t");
+  // SerialBT.print(aaReal.x);
+  // SerialBT.print("\t");
+  // SerialBT.print(aaReal.y);
+  // SerialBT.print("\t");
+  // SerialBT.println(aaReal.z);
     }
 }
