@@ -106,7 +106,7 @@ void loop() {
     while (!mpuInterrupt && fifoCount < packetSize) {
         // AQUI EL RESTO DEL CODIGO DE TU PROGRRAMA
         pid_pitch.ComputePid(pitch);
-        
+
     }
 
     mpuInterrupt = false;

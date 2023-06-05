@@ -20,7 +20,7 @@ class Pid
     int tick_pid;
 
     public:
-    Pid(double p, double d,double sp, double tick);
+    Pid(double p, double i, double d,double sp, double tick);
     double ComputePid(double inp);
 };
 #endif
