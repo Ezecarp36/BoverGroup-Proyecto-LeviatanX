@@ -4,14 +4,14 @@
 #include <ESP32Servo.h>
 #include "BluetoothSerialBT.h"
 #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
-    #include "Wire.h"
+#include "Wire.h"
 #endif
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
 #endif
 
-//constantes
+// constantes
 #define PIN_MOTOR_1 32
 #define PIN_MOTOR_2 33
 #define PIN_MOTOR_3 25
@@ -30,25 +30,25 @@
 #define CALIBRACION_YGYROOFFSET 76
 #define CALIBRACION_ZGYROOFFSET -85
 #define CALIBRACION_ZACCELOFFSET 1688
-//variables
+// variables
 double input = 0.0;
 double setpoint_pitch = 0.0;
 double kp_pitch = 0.2, ti_pitch = 0.2, td_pitch = 0.2;
-int pitch,yaw,roll;
-int velocidad_pitch= 0;
+int pitch, yaw, roll;
+int velocidad_pitch = 0;
 bool estado_boton;
 int velocidad_pitch_aumenta, velocidad_pitch_disminuye;
 int resultadoPidPitch;
 
-
-enum state {
+enum state
+{
     ESPERA,
     INICIO_DE_VUELO,
     PRUEBA_PID
 };
 int state = ESPERA;
 
-//inicializo objetos
+// inicializo objetos
 BluetoothSerial SerialBT;
 MPU6050 mpu;
 Pid *calculo_pid_pitch = new Pid(kp_pitch, ti_pitch, td_pitch, setpoint_pitch, TICK_PID_PITCH);
@@ -71,31 +71,33 @@ VectorInt16 aaWorld;    // [x, y, z]
 VectorFloat gravity;    // [x, y, z]
 float ypr[3];           // [yaw, pitch, roll]
 
-//FUNCION QUE CAMBIA A ALTO CUANDO INT RECIBE DATOS DE LA MPU E INTERRUMPE uC
+// FUNCION QUE CAMBIA A ALTO CUANDO INT RECIBE DATOS DE LA MPU E INTERRUMPE uC
 volatile bool mpuInterrupt = false;
-void dmpDataReady() {
+void dmpDataReady()
+{
     mpuInterrupt = true;
 }
 
-void setup() {
-    // inicializar I2C con MPU6050 en biblioteca I2Cdev se utiliza la biblioteca Wire o Fastwire para establecer la comunicación y configurar la frecuencia de reloj del bus I2C.
-    #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
-        Wire.begin();
-        Wire.setClock(400000); // 400kHz I2C clock. Comment this line if having compilation difficulties
-    #elif I2CDEV_IMPLEMENTATION == I2CDEV_BUILTIN_FASTWIRE
-        Fastwire::setup(400, true);
-    #endif
+void setup()
+{
+// inicializar I2C con MPU6050 en biblioteca I2Cdev se utiliza la biblioteca Wire o Fastwire para establecer la comunicación y configurar la frecuencia de reloj del bus I2C.
+#if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
+    Wire.begin();
+    Wire.setClock(400000); // 400kHz I2C clock. Comment this line if having compilation difficulties
+#elif I2CDEV_IMPLEMENTATION == I2CDEV_BUILTIN_FASTWIRE
+    Fastwire::setup(400, true);
+#endif
 
     Serial.begin(9600);
-    //nombre bluetooth y mensaje
-    SerialBT.begin("LeviatanX"); //Bluetooth device name
+    // nombre bluetooth y mensaje
+    SerialBT.begin("LeviatanX"); // Bluetooth device name
     SerialBT.println("Start Bluetooth");
     delay(3000);
     // Iniciar MPU6050
     SerialBT.println(F("Initializing I2C devices..."));
     mpu.initialize();
-    //configuramos motores
-    motor1.attach(PIN_MOTOR_1);  // Inicializa el motor brushless en el pin correspondiente
+    // configuramos motores
+    motor1.attach(PIN_MOTOR_1); // Inicializa el motor brushless en el pin correspondiente
     motor2.attach(PIN_MOTOR_2);
     motor3.attach(PIN_MOTOR_3);
     motor4.attach(PIN_MOTOR_4);
@@ -112,7 +114,8 @@ void setup() {
     mpu.setZGyroOffset(CALIBRACION_ZGYROOFFSET);
     mpu.setZAccelOffset(CALIBRACION_ZACCELOFFSET);
     // Activar DMP
-    if (devStatus == 0) {
+    if (devStatus == 0)
+    {
         SerialBT.println(F("Enabling DMP..."));
         mpu.setDMPEnabled(true);
         // Activar interrupcion
@@ -122,7 +125,9 @@ void setup() {
         dmpReady = true;
         // get expected DMP packet size for later comparison
         packetSize = mpu.dmpGetFIFOPacketSize();
-    } else {
+    }
+    else
+    {
         // ERROR!
         // 1 = initial memory load failed
         // 2 = DMP configuration updates failed
@@ -133,43 +138,52 @@ void setup() {
     }
 }
 
-void loop() {
+void loop()
+{
     // Si fallo al iniciar, parar programa
-    if (!dmpReady) return;
+    if (!dmpReady)
+        return;
 
     // Ejecutar mientras no hay interrupcion
-    while (!mpuInterrupt && fifoCount < packetSize) {
+    while (!mpuInterrupt && fifoCount < packetSize)
+    {
         // AQUI EL RESTO DEL CODIGO DE TU PROGRRAMA
         resultadoPidPitch = calculo_pid_pitch->ComputePid(pitch);
         switch (state)
         {
-        case ESPERA:{
+        case ESPERA:
+        {
             velocidad_pitch = NIVEL_MOTOR_PARADO;
             motor1.writeMicroseconds(velocidad_pitch);
             motor2.writeMicroseconds(velocidad_pitch);
             motor3.writeMicroseconds(velocidad_pitch);
-            motor4.writeMicroseconds(velocidad_pitch); 
-            if (digitalRead(estado_boton)){
+            motor4.writeMicroseconds(velocidad_pitch);
+            if (digitalRead(estado_boton))
+            {
                 state = INICIO_DE_VUELO;
-            }        
+            }
             break;
         }
-        case INICIO_DE_VUELO:{
-                for (int i = 1000; i < 1800; i= i+25) 
+        case INICIO_DE_VUELO:
+        {
+            for (int i = 1000; i < 1800; i = i + 25)
+            {
+                motor1.writeMicroseconds(i);
+                motor2.writeMicroseconds(i);
+                motor3.writeMicroseconds(i);
+                motor4.writeMicroseconds(i);
+                delay(500);
+                if (i >= 1400)
                 {
-                    motor1.writeMicroseconds(i);
-                    motor2.writeMicroseconds(i);
-                    motor3.writeMicroseconds(i);
-                    motor4.writeMicroseconds(i);
-                    delay(500);
-                    if (i >= 1400){
-                      state = PRUEBA_PID;
-                    } 
+                    state = PRUEBA_PID;
                 }
+            }
             break;
         }
-        case PRUEBA_PID:{
-            if(pitch > 0 ){
+        case PRUEBA_PID:
+        {
+            if (pitch > 0)
+            {
                 velocidad_pitch_aumenta = velocidad_pitch + resultadoPidPitch;
                 velocidad_pitch_disminuye = velocidad_pitch - resultadoPidPitch;
                 motor1.writeMicroseconds(velocidad_pitch_aumenta);
@@ -177,7 +191,8 @@ void loop() {
                 motor3.writeMicroseconds(velocidad_pitch_aumenta);
                 motor4.writeMicroseconds(velocidad_pitch_disminuye);
             }
-            else if(pitch < 0){
+            else if (pitch < 0)
+            {
                 velocidad_pitch_aumenta = velocidad_pitch + resultadoPidPitch;
                 velocidad_pitch_disminuye = velocidad_pitch - resultadoPidPitch;
                 motor1.writeMicroseconds(velocidad_pitch_disminuye);
@@ -185,12 +200,13 @@ void loop() {
                 motor3.writeMicroseconds(velocidad_pitch_disminuye);
                 motor4.writeMicroseconds(velocidad_pitch_aumenta);
             }
-            else {
+            else
+            {
                 velocidad_pitch = 1400;
                 motor1.writeMicroseconds(velocidad_pitch);
                 motor2.writeMicroseconds(velocidad_pitch);
                 motor3.writeMicroseconds(velocidad_pitch);
-                motor4.writeMicroseconds(velocidad_pitch); 
+                motor4.writeMicroseconds(velocidad_pitch);
             }
             break;
         }
@@ -204,46 +220,49 @@ void loop() {
     fifoCount = mpu.getFIFOCount();
 
     // Controlar overflow
-    if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
+    if ((mpuIntStatus & 0x10) || fifoCount == 1024)
+    {
         mpu.resetFIFO();
         SerialBT.println(F("FIFO overflow!"));
-    } 
-    else if (mpuIntStatus & 0x02) {
+    }
+    else if (mpuIntStatus & 0x02)
+    {
         // wait for correct available data length, should be a VERY short wait
-        while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
+        while (fifoCount < packetSize)
+            fifoCount = mpu.getFIFOCount();
 
         // read a packet from FIFO
         mpu.getFIFOBytes(fifoBuffer, packetSize);
-        
+
         // track FIFO count here in case there is > 1 packet available
         // (this lets us immediately read more without waiting for an interrupt)
         fifoCount -= packetSize;
 
-  // MMostrar Yaw, Pitch, Roll
-  mpu.dmpGetQuaternion(&q, fifoBuffer);
-  mpu.dmpGetGravity(&gravity, &q);
-  mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
-  yaw = ypr[0] * 180/M_PI;
-  pitch = ypr[1] * 180/M_PI;
-  roll = ypr[2] * 180/M_PI;
-  SerialBT.print("ypr\t");
-  SerialBT.print(yaw);
-  SerialBT.print("\t");
-  SerialBT.print(pitch);
-  SerialBT.print("\t");
-  SerialBT.println(roll);
-  
-  delay(50);
-  // Mostrar aceleracion
-  // mpu.dmpGetQuaternion(&q, fifoBuffer);
-  // mpu.dmpGetAccel(&aa, fifoBuffer);
-  // mpu.dmpGetGravity(&gravity, &q);
-  // mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
-  // SerialBT.print("areal\t");
-  // SerialBT.print(aaReal.x);
-  // SerialBT.print("\t");
-  // SerialBT.print(aaReal.y);
-  // SerialBT.print("\t");
-  // SerialBT.println(aaReal.z);
+        // MMostrar Yaw, Pitch, Roll
+        mpu.dmpGetQuaternion(&q, fifoBuffer);
+        mpu.dmpGetGravity(&gravity, &q);
+        mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
+        yaw = ypr[0] * 180 / M_PI;
+        pitch = ypr[1] * 180 / M_PI;
+        roll = ypr[2] * 180 / M_PI;
+        SerialBT.print("ypr\t");
+        SerialBT.print(yaw);
+        SerialBT.print("\t");
+        SerialBT.print(pitch);
+        SerialBT.print("\t");
+        SerialBT.println(roll);
+
+        delay(50);
+        // Mostrar aceleracion
+        // mpu.dmpGetQuaternion(&q, fifoBuffer);
+        // mpu.dmpGetAccel(&aa, fifoBuffer);
+        // mpu.dmpGetGravity(&gravity, &q);
+        // mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
+        // SerialBT.print("areal\t");
+        // SerialBT.print(aaReal.x);
+        // SerialBT.print("\t");
+        // SerialBT.print(aaReal.y);
+        // SerialBT.print("\t");
+        // SerialBT.println(aaReal.z);
     }
 }
