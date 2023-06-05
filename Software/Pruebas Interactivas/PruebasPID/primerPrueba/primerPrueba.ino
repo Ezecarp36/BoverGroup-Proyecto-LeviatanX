@@ -1,6 +1,7 @@
 #include "PID.h"
 #include "I2Cdev.h"
 #include "MPU6050_6Axis_MotionApps20.h"
+#include <RF24.h>
 #include <ESP32Servo.h>
 #include "BluetoothSerialBT.h"
 #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
@@ -17,6 +18,8 @@
 #define PIN_MOTOR_3 25
 #define PIN_MOTOR_4 26
 #define PIN_INTERRUPT 16
+#define PIN_CE 27
+#define PIN_CSN 17
 #define TICK_DEBUG 100
 #define VELOCIDAD_ESCALADA 3
 #define VELOCIDAD_MAXIMA 1800
@@ -37,7 +40,7 @@ double setpoint_pitch = 0.0;
 double kp_pitch = 0.2, ti_pitch = 0.2, td_pitch = 0.2;
 int pitch, yaw, roll;
 int velocidad_pitch = 0;
-bool estado_boton;
+bool estado_boton = false;
 int velocidad_pitch_aumenta, velocidad_pitch_disminuye;
 int resultadoPidPitch;
 
@@ -50,6 +53,7 @@ enum state
 int state = ESPERA;
 
 // inicializo objetos
+RF24 radio(PIN_CE, PIN_CSN);
 BluetoothSerial SerialBT;
 MPU6050 mpu;
 Pid *calculo_pid_pitch = new Pid(kp_pitch, ti_pitch, td_pitch, setpoint_pitch, TICK_PID_PITCH);
@@ -81,15 +85,20 @@ void dmpDataReady()
 
 void setup()
 {
-// inicializar I2C con MPU6050 en biblioteca I2Cdev se utiliza la biblioteca Wire o Fastwire para establecer la comunicación y configurar la frecuencia de reloj del bus I2C.
+    // inicializar I2C con MPU6050 en biblioteca I2Cdev se utiliza la biblioteca Wire o Fastwire para establecer la comunicación y configurar la frecuencia de reloj del bus I2C.
 #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
     Wire.begin();
     Wire.setClock(400000); // 400kHz I2C clock. Comment this line if having compilation difficulties
 #elif I2CDEV_IMPLEMENTATION == I2CDEV_BUILTIN_FASTWIRE
     Fastwire::setup(400, true);
 #endif
-
+    // configuracion comunicacion a rf del receptor
+    radio.begin();
+    radio.setDataRate(RF24_250KBPS);
+    radio.openReadingPipe(1, ADDRESS);
+    radio.startListening();
     Serial.begin(9600);
+
     // nombre bluetooth y mensaje
     SerialBT.begin("LeviatanX"); // Bluetooth device name
     SerialBT.println("Start Bluetooth");
@@ -147,70 +156,74 @@ void loop()
 
     // Ejecutar mientras no hay interrupcion
     while (!mpuInterrupt && fifoCount < packetSize)
-    {
-        // AQUI EL RESTO DEL CODIGO DE TU PROGRRAMA
-        resultadoPidPitch = calculo_pid_pitch->ComputePid(pitch);
-        switch (state)
+    {                          // AQUI EL RESTO DEL CODIGO DE TU PROGRRAMA
+        if (radio.available()) // si hay comunicacion recibe mensaje
         {
-        case ESPERA:
-        {
-            velocidad_pitch = NIVEL_MOTOR_PARADO;
-            motor1.writeMicroseconds(velocidad_pitch);
-            motor2.writeMicroseconds(velocidad_pitch);
-            motor3.writeMicroseconds(velocidad_pitch);
-            motor4.writeMicroseconds(velocidad_pitch);
-            if (digitalRead(estado_boton))
+            radio.read(&estado_boton, sizeof(estado_boton)); // recibe mensaje
+
+            resultadoPidPitch = calculo_pid_pitch->ComputePid(pitch);
+            switch (state)
             {
-                state = INICIO_DE_VUELO;
-            }
-            break;
-        }
-        case INICIO_DE_VUELO:
-        {
-            for (int i = 1000; i < 1800; i = i + 25)
+            case ESPERA:
             {
-                motor1.writeMicroseconds(i);
-                motor2.writeMicroseconds(i);
-                motor3.writeMicroseconds(i);
-                motor4.writeMicroseconds(i);
-                delay(500);
-                if (i >= 1400)
-                {
-                    state = PRUEBA_PID;
-                }
-            }
-            break;
-        }
-        case PRUEBA_PID:
-        {
-            if (pitch > setpoint_pitch)
-            {
-                velocidad_pitch_aumenta = velocidad_pitch + resultadoPidPitch;
-                velocidad_pitch_disminuye = velocidad_pitch - resultadoPidPitch;
-                motor1.writeMicroseconds(velocidad_pitch_aumenta);
-                motor2.writeMicroseconds(velocidad_pitch_disminuye);
-                motor3.writeMicroseconds(velocidad_pitch_aumenta);
-                motor4.writeMicroseconds(velocidad_pitch_disminuye);
-            }
-            else if (pitch < setpoint_pitch)
-            {
-                velocidad_pitch_aumenta = velocidad_pitch + resultadoPidPitch;
-                velocidad_pitch_disminuye = velocidad_pitch - resultadoPidPitch;
-                motor1.writeMicroseconds(velocidad_pitch_disminuye);
-                motor2.writeMicroseconds(velocidad_pitch_aumenta);
-                motor3.writeMicroseconds(velocidad_pitch_disminuye);
-                motor4.writeMicroseconds(velocidad_pitch_aumenta);
-            }
-            else
-            {
-                velocidad_pitch = 1400;
+                velocidad_pitch = NIVEL_MOTOR_PARADO;
                 motor1.writeMicroseconds(velocidad_pitch);
                 motor2.writeMicroseconds(velocidad_pitch);
                 motor3.writeMicroseconds(velocidad_pitch);
                 motor4.writeMicroseconds(velocidad_pitch);
+                if (digitalRead(estado_boton))
+                {
+                    state = INICIO_DE_VUELO;
+                }
+                break;
             }
-            break;
-        }
+            case INICIO_DE_VUELO:
+            {
+                for (int i = 1000; i < 1800; i = i + 25)
+                {
+                    motor1.writeMicroseconds(i);
+                    motor2.writeMicroseconds(i);
+                    motor3.writeMicroseconds(i);
+                    motor4.writeMicroseconds(i);
+                    delay(500);
+                    if (i >= 1400)
+                    {
+                        state = PRUEBA_PID;
+                    }
+                }
+                break;
+            }
+            case PRUEBA_PID:
+            {
+                if (pitch > setpoint_pitch)
+                {
+                    velocidad_pitch_aumenta = velocidad_pitch + resultadoPidPitch;
+                    velocidad_pitch_disminuye = velocidad_pitch - resultadoPidPitch;
+                    motor1.writeMicroseconds(velocidad_pitch_aumenta);
+                    motor2.writeMicroseconds(velocidad_pitch_disminuye);
+                    motor3.writeMicroseconds(velocidad_pitch_aumenta);
+                    motor4.writeMicroseconds(velocidad_pitch_disminuye);
+                }
+                else if (pitch < setpoint_pitch)
+                {
+                    velocidad_pitch_aumenta = velocidad_pitch + resultadoPidPitch;
+                    velocidad_pitch_disminuye = velocidad_pitch - resultadoPidPitch;
+                    motor1.writeMicroseconds(velocidad_pitch_disminuye);
+                    motor2.writeMicroseconds(velocidad_pitch_aumenta);
+                    motor3.writeMicroseconds(velocidad_pitch_disminuye);
+                    motor4.writeMicroseconds(velocidad_pitch_aumenta);
+                }
+                else
+                {
+                    velocidad_pitch = 1400;
+                    motor1.writeMicroseconds(velocidad_pitch);
+                    motor2.writeMicroseconds(velocidad_pitch);
+                    motor3.writeMicroseconds(velocidad_pitch);
+                    motor4.writeMicroseconds(velocidad_pitch);
+                }
+                break;
+            }
+            }
         }
     }
 
